@@ -1,0 +1,94 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Eugenio Fuenzalida | Minimalist Zen">
+  <div class="min-h-screen bg-[#FDFDFD] text-neutral-900 font-sans selection:bg-black selection:text-white overflow-x-hidden">
+    
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-xl border-b border-neutral-100 transition-all duration-300">
+      <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+        <div class="text-xl font-medium tracking-tight">
+          Eugenio Fuenzalida.
+        </div>
+        <div class="hidden md:flex gap-10 text-sm font-medium text-neutral-500">
+          <a href="#" class="text-neutral-900 transition-colors">Visión</a>
+          <a href="#" class="hover:text-neutral-900 transition-colors">Programas</a>
+          <a href="#" class="hover:text-neutral-900 transition-colors">Insights</a>
+        </div>
+        <a href="#agendar" class="hidden md:inline-flex px-6 py-2.5 text-sm font-medium rounded-full bg-black text-white hover:bg-neutral-800 transition-colors">
+          Agendar Sesión
+        </a>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="relative pt-40 pb-32 px-6 flex flex-col items-center justify-center min-h-[90vh]">
+      <!-- subtle background blur -->
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-neutral-100 rounded-full blur-[100px] -z-10 opacity-50"></div>
+      
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-6xl md:text-8xl font-light tracking-tighter text-neutral-900 mb-8 leading-[1.05]">
+          Claridad mental.<br/>
+          <span class="font-semibold text-black">Rendimiento absoluto.</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-neutral-500 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
+          Psicología deportiva y de alto rendimiento. Diseñamos la arquitectura mental que separa a lo bueno de lo extraordinario.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+          <a href="#agendar" class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-medium bg-black text-white rounded-full overflow-hidden transition-transform hover:scale-105">
+            <span class="relative z-10">Comenzar ahora</span>
+            <div class="absolute inset-0 bg-neutral-800 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
+          </a>
+          <a href="#metodo" class="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-neutral-900 hover:text-neutral-600 transition-colors">
+            Descubrir el método →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Enfoque -->
+    <section id="metodo" class="py-32 bg-white px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid lg:grid-cols-2 gap-20 items-center">
+          <div class="order-2 lg:order-1 relative">
+            <div class="aspect-[4/5] rounded-[2.5rem] overflow-hidden bg-neutral-100 relative group">
+              <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-90 mix-blend-multiply"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+            </div>
+            <!-- Floating card -->
+            <div class="absolute -bottom-10 -right-10 bg-white p-8 rounded-3xl shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] max-w-xs hidden md:block">
+              <p class="text-4xl font-light tracking-tighter mb-2 text-black">98%</p>
+              <p class="text-sm text-neutral-500">De los atletas reportan mayor foco y reducción de ansiedad pre-competitiva en 4 semanas.</p>
+            </div>
+          </div>
+          
+          <div class="order-1 lg:order-2">
+            <h2 class="text-4xl md:text-5xl font-semibold tracking-tight mb-6">La ciencia de ganar.</h2>
+            <p class="text-xl text-neutral-500 mb-12 font-light leading-relaxed">
+              Tu mente es el limitante o el acelerador de tu potencial físico y profesional. Utilizamos métricas claras y protocolos basados en evidencia.
+            </p>
+            
+            <div class="space-y-12">
+              {[
+                { title: "Claridad Estratégica", desc: "Elimina el ruido. Define objetivos con precisión quirúrgica y desarrolla la resiliencia para alcanzarlos." },
+                { title: "Dominio Emocional", desc: "Aprende a usar la presión como combustible. Técnicas de regulación emocional en tiempo real." },
+                { title: "Recuperación Cognitiva", desc: "El descanso es un arma. Protocolos de sueño y desconexión para maximizar la adaptación neuroplástica." }
+              ].map((item, i) => (
+                <div class="flex gap-6 group cursor-default">
+                  <div class="text-neutral-300 font-light text-2xl group-hover:text-black transition-colors duration-300">
+                    0{i + 1}
+                  </div>
+                  <div>
+                    <h3 class="text-xl font-medium mb-2 group-hover:translate-x-2 transition-transform duration-300">{item.title}</h3>
+                    <p class="text-neutral-500 leading-relaxed group-hover:translate-x-2 transition-transform duration-300 delay-75">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

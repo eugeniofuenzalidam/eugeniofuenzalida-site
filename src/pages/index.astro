@@ -1,0 +1,99 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import EnfoqueSection from '../components/EnfoqueSection.astro';
+import ServiceSection from '../components/ServiceSection.astro';
+import Newsletter from '../components/Newsletter.astro';
+import ImageGrid from '../components/ImageGrid.astro';
+import Footer from '../components/Footer.astro';
+import LeadFilterForm from '../components/LeadFilterForm';
+import BookingCalendar from '../components/BookingCalendar';
+---
+
+<Layout title="Eugenio Fuenzalida | Alto Rendimiento">
+  <div class="min-h-screen bg-[#FDFDFD] text-neutral-900 font-sans selection:bg-black selection:text-white overflow-x-hidden">
+    <Navbar />
+    <main>
+      <Hero />
+      <About />
+      <EnfoqueSection />
+      <ServiceSection />
+
+      <section id="agendar" class="py-32 bg-white px-6">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-20">
+            <h2 class="text-4xl md:text-5xl font-semibold tracking-tight mb-6">Agendar.</h2>
+            <p class="text-xl text-neutral-500 max-w-2xl mx-auto font-light leading-relaxed">
+              Inicia tu proceso de transformación hacia el alto rendimiento.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-4xl mx-auto">
+            <div>
+              <h3 class="text-xl font-medium tracking-tight text-black mb-6">Cuéntanos sobre ti</h3>
+              <LeadFilterForm client:visible />
+            </div>
+            <div>
+              <h3 class="text-xl font-medium tracking-tight text-black mb-6">Calendario</h3>
+              <BookingCalendar client:visible />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Newsletter />
+      <ImageGrid />
+    </main>
+    <Footer />
+  </div>
+
+  <script>
+    document.querySelectorAll('[data-accordion-trigger]').forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        const parent = trigger.closest('.group\\/accordion');
+        if (!parent) return;
+
+        const content = parent.querySelector('[data-accordion-content]');
+        const icon = trigger.querySelector('.accordion-icon');
+
+        if (content?.classList.contains('hidden')) {
+          content.classList.remove('hidden');
+          content.style.maxHeight = '0';
+          content.style.overflow = 'hidden';
+          content.style.transition = 'max-height 0.3s ease-out';
+          requestAnimationFrame(() => {
+            content.style.maxHeight = content.scrollHeight + 'px';
+          });
+          icon?.classList.add('rotate-180');
+        } else {
+          content.style.maxHeight = '0';
+          icon?.classList.remove('rotate-180');
+          setTimeout(() => {
+            content?.classList.add('hidden');
+            content.style.maxHeight = '';
+            content.style.overflow = '';
+            content.style.transition = '';
+          }, 300);
+        }
+      });
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('opacity-100', 'translate-y-0');
+            entry.target.classList.remove('opacity-0', 'translate-y-8');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll('section').forEach((section) => {
+      section.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-8');
+      observer.observe(section);
+    });
+  </script>
+</Layout>

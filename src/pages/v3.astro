@@ -1,0 +1,117 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Eugenio Fuenzalida | Bold Athletic">
+  <div class="min-h-screen bg-zinc-900 text-zinc-100 font-sans selection:bg-[#FF3E00] selection:text-white overflow-x-hidden">
+    
+    <!-- Navbar -->
+    <nav class="absolute w-full z-50 top-0 py-6 px-8">
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <div class="text-3xl font-black italic tracking-tighter text-white">
+          EF<span class="text-[#FF3E00]">.</span>
+        </div>
+        <div class="hidden md:flex gap-8 text-sm font-bold uppercase tracking-widest text-zinc-400">
+          <a href="#" class="hover:text-white transition-colors">Sistema</a>
+          <a href="#" class="hover:text-white transition-colors">Resultados</a>
+          <a href="#" class="hover:text-white transition-colors">Filosofía</a>
+        </div>
+        <a href="#agendar" class="hidden md:inline-flex px-8 py-3 text-sm font-black uppercase tracking-widest bg-[#FF3E00] text-white hover:bg-white hover:text-zinc-900 transition-colors skew-x-[-10deg]">
+          <span class="skew-x-[10deg]">Entrenar</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+      <!-- Dynamic Background Elements -->
+      <div class="absolute inset-0 z-0">
+        <div class="absolute right-0 top-0 w-2/3 h-full bg-zinc-800 skew-x-[-15deg] translate-x-32 transform-gpu"></div>
+        <div class="absolute right-0 top-0 w-1/2 h-full bg-[url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center mix-blend-overlay opacity-40 skew-x-[-15deg] translate-x-40"></div>
+        <div class="absolute right-0 top-0 w-1/3 h-full bg-[#FF3E00] opacity-90 mix-blend-multiply skew-x-[-15deg] translate-x-52"></div>
+      </div>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-8 w-full">
+        <div class="max-w-2xl">
+          <div class="inline-block px-4 py-1 bg-zinc-800 text-[#FF3E00] font-bold tracking-widest uppercase text-xs mb-8 skew-x-[-10deg]">
+            <span class="inline-block skew-x-[10deg]">Psicología de Alto Rendimiento</span>
+          </div>
+          <h1 class="text-7xl md:text-[6rem] font-black uppercase italic leading-[0.85] tracking-tighter mb-8 text-white">
+            FORJA <br/>
+            TU <span class="text-transparent border-text" style="-webkit-text-stroke: 2px #FF3E00;">MENTE</span>.
+          </h1>
+          <p class="text-xl text-zinc-300 mb-10 font-medium max-w-lg border-l-4 border-[#FF3E00] pl-6">
+            Para dominar en la cancha, en la pista o en la junta directiva, primero debes dominar la voz en tu cabeza. Estrategias brutales de rendimiento absoluto.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="#agendar" class="inline-flex items-center justify-center px-10 py-5 text-lg font-black uppercase tracking-widest bg-[#FF3E00] text-white hover:bg-white hover:text-zinc-900 transition-colors skew-x-[-10deg]">
+              <span class="skew-x-[10deg]">Empieza el trabajo</span>
+            </a>
+            <a href="#metodo" class="inline-flex items-center justify-center px-10 py-5 text-lg font-bold uppercase tracking-widest bg-zinc-800 text-white hover:bg-zinc-700 transition-colors skew-x-[-10deg]">
+              <span class="skew-x-[10deg]">Ver el sistema</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Scroll indicator -->
+      <div class="absolute bottom-10 left-8 md:left-auto md:right-10 z-10 text-zinc-500 font-bold uppercase tracking-widest text-xs flex flex-col items-center gap-2">
+        <span class="rotate-90 origin-left ml-4">Scroll</span>
+        <div class="w-[2px] h-16 bg-zinc-700 relative overflow-hidden">
+          <div class="w-full h-1/2 bg-[#FF3E00] absolute top-0 animate-bounce"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Marquee Banner -->
+    <div class="bg-[#FF3E00] py-4 overflow-hidden flex whitespace-nowrap relative z-20 shadow-2xl">
+      <div class="animate-marquee inline-block font-black text-2xl uppercase tracking-widest text-white/90">
+        RENDIMIENTO DE ÉLITE • PSICOLOGÍA DEPORTIVA • RESILIENCIA • FOCO • DISCIPLINA • RENDIMIENTO DE ÉLITE • PSICOLOGÍA DEPORTIVA • RESILIENCIA • FOCO • DISCIPLINA •
+      </div>
+    </div>
+
+    <!-- Enfoque -->
+    <section id="metodo" class="py-32 bg-zinc-950 px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+          <div>
+            <h2 class="text-5xl md:text-7xl font-black uppercase italic tracking-tighter text-white">El <span class="text-[#FF3E00]">Arsenal</span></h2>
+          </div>
+          <p class="max-w-sm text-zinc-400 font-medium">No confiamos en la suerte. Construimos sistemas replicables para la excelencia competitiva bajo presión extrema.</p>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-6">
+          {[
+            { id: "01", title: "Foco Inquebrantable", desc: "Técnicas de concentración túnel para bloquear distracciones cuando todo está en juego." },
+            { id: "02", title: "Resiliencia Activa", desc: "Procesamiento de errores en tiempo real para no arrastrar la carga de un fallo al siguiente movimiento." },
+            { id: "03", title: "Rutinas de Poder", desc: "Secuencias pre-competitivas diseñadas para activar el sistema nervioso en el estado óptimo de rendimiento." }
+          ].map(item => (
+            <div class="group relative bg-zinc-900 p-10 hover:bg-[#FF3E00] transition-colors duration-300 overflow-hidden skew-x-[-5deg]">
+              <div class="absolute -right-4 -top-4 text-8xl font-black text-zinc-800/50 group-hover:text-white/20 transition-colors pointer-events-none italic">
+                {item.id}
+              </div>
+              <div class="relative z-10 skew-x-[5deg]">
+                <h3 class="text-2xl font-black uppercase mb-4 text-white">{item.title}</h3>
+                <div class="w-12 h-1 bg-[#FF3E00] mb-6 group-hover:bg-white transition-colors"></div>
+                <p class="text-zinc-400 group-hover:text-white/90 font-medium leading-relaxed">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+    
+    <style>
+      @keyframes marquee {
+        0% { transform: translateX(0%); }
+        100% { transform: translateX(-50%); }
+      }
+      .animate-marquee {
+        animation: marquee 15s linear infinite;
+      }
+      .animate-marquee:hover {
+        animation-play-state: paused;
+      }
+    </style>
+  </div>
+</Layout>

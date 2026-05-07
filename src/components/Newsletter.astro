@@ -1,0 +1,64 @@
+---
+---
+
+<section id="newsletter" class="py-32 bg-black text-white px-6">
+  <div class="max-w-4xl mx-auto text-center">
+    <h2 class="text-4xl md:text-5xl font-semibold tracking-tight mb-6">Insights & Estrategias.</h2>
+    <p class="text-xl text-neutral-400 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
+      Recibe artículos, herramientas y estrategias de alto rendimiento directamente en tu correo. Sin spam, solo valor.
+    </p>
+    <form id="newsletter-form" class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+      <input
+        type="email"
+        name="email"
+        placeholder="tu@email.com"
+        required
+        class="flex-1 px-6 py-4 rounded-full bg-white/10 border border-white/20 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent text-white placeholder-neutral-500 font-light"
+      />
+      <button
+        type="submit"
+        class="px-8 py-4 bg-white text-black font-medium rounded-full hover:bg-neutral-200 transition-colors"
+      >
+        Suscribirse
+      </button>
+    </form>
+    <p id="newsletter-message" class="mt-6 text-sm font-light hidden"></p>
+  </div>
+</section>
+
+<script>
+  import { collection, addDoc } from "firebase/firestore";
+  import { db } from "../lib/firebase";
+
+  const form = document.getElementById("newsletter-form") as HTMLFormElement;
+  const message = document.getElementById("newsletter-message") as HTMLParagraphElement;
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = (form.elements.namedItem("email") as HTMLInputElement)?.value;
+
+    if (!email) return;
+
+    const btn = form.querySelector("button") as HTMLButtonElement;
+    btn.disabled = true;
+    btn.textContent = "Enviando...";
+
+    try {
+      await addDoc(collection(db, "newsletter"), {
+        email,
+        subscribedAt: new Date().toISOString(),
+      });
+
+      message.textContent = "¡Suscripción exitosa! Gracias por unirte.";
+      message.className = "mt-6 text-sm font-light text-green-400";
+      form.reset();
+    } catch {
+      message.textContent = "Hubo un error. Intenta nuevamente.";
+      message.className = "mt-6 text-sm font-light text-red-400";
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Suscribirse";
+      message.classList.remove("hidden");
+    }
+  });
+</script>

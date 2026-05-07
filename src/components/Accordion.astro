@@ -1,0 +1,30 @@
+---
+interface Props {
+  title: string;
+  id?: string;
+}
+
+const { title, id } = Astro.props;
+---
+
+<div class="border-b border-neutral-100 overflow-hidden group/accordion">
+  <button
+    class="accordion-trigger w-full flex items-center justify-between py-6 bg-transparent hover:bg-neutral-50/50 transition-colors text-left"
+    data-accordion-trigger
+  >
+    <span class="text-lg font-medium text-neutral-900 group-hover/accordion:translate-x-2 transition-transform duration-300">{title}</span>
+    <svg
+      class="accordion-icon w-5 h-5 text-neutral-400 transition-transform duration-300"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+  <div class="accordion-content hidden pb-6 pr-6" data-accordion-content>
+    <div class="text-neutral-600 font-light leading-relaxed">
+      <slot />
+    </div>
+  </div>
+</div>
