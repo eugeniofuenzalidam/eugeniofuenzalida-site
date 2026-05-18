@@ -14,9 +14,9 @@ import Accordion from './Accordion.astro';
     <div class="space-y-24">
       
       <!-- ======= Psicología ======= -->
-      <div class="service-row">
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_260px] gap-8 lg:gap-12 items-start">
         <!-- Content col -->
-        <div class="service-content">
+        <div class="min-w-0">
           <div class="flex items-center gap-3 mb-6">
             <span class="text-xs font-bold tracking-widest text-neutral-300 uppercase">01</span>
             <h3 class="text-2xl md:text-3xl font-semibold tracking-tight text-black">Psicología</h3>
@@ -73,16 +73,16 @@ import Accordion from './Accordion.astro';
         </div>
 
         <!-- Image col — desktop only -->
-        <aside class="service-image">
-          <div class="service-image-frame">
-            <img src="/images/psicologia.jpeg" alt="Psicología" class="service-img" loading="lazy" />
+        <aside class="hidden lg:block sticky top-32 w-[260px] shrink-0">
+          <div class="relative w-full aspect-[3/4] rounded-2xl overflow-hidden bg-neutral-100 shadow-xl">
+            <img src="/images/psicologia.jpeg" alt="Psicología" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
           </div>
         </aside>
       </div>
 
       <!-- ======= Desarrollo Profesional ======= -->
-      <div class="service-row">
-        <div class="service-content">
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_260px] gap-8 lg:gap-12 items-start">
+        <div class="min-w-0">
           <div class="flex items-center gap-3 mb-6">
             <span class="text-xs font-bold tracking-widest text-neutral-300 uppercase">02</span>
             <h3 class="text-2xl md:text-3xl font-semibold tracking-tight text-black">Desarrollo Profesional</h3>
@@ -146,16 +146,16 @@ import Accordion from './Accordion.astro';
           </div>
         </div>
 
-        <aside class="service-image">
-          <div class="service-image-frame">
-            <img src="/images/desarrollo-profesional.jpg" alt="Desarrollo Profesional" class="service-img" loading="lazy" />
+        <aside class="hidden lg:block sticky top-32 w-[260px] shrink-0">
+          <div class="relative w-full aspect-[3/4] rounded-2xl overflow-hidden bg-neutral-100 shadow-xl">
+            <img src="/images/desarrollo-profesional.jpg" alt="Desarrollo Profesional" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
           </div>
         </aside>
       </div>
 
       <!-- ======= Consultoría Organizacional ======= -->
-      <div class="service-row">
-        <div class="service-content">
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_260px] gap-8 lg:gap-12 items-start">
+        <div class="min-w-0">
           <div class="flex items-center gap-3 mb-6">
             <span class="text-xs font-bold tracking-widest text-neutral-300 uppercase">03</span>
             <h3 class="text-2xl md:text-3xl font-semibold tracking-tight text-black">Consultoría Organizacional</h3>
@@ -188,9 +188,9 @@ import Accordion from './Accordion.astro';
           </div>
         </div>
 
-        <aside class="service-image">
-          <div class="service-image-frame">
-            <img src="/images/organizacional.jpeg" alt="Consultoría Organizacional" class="service-img object-center" loading="lazy" />
+        <aside class="hidden lg:block sticky top-32 w-[260px] shrink-0">
+          <div class="relative w-full aspect-[3/4] rounded-2xl overflow-hidden bg-neutral-100 shadow-xl">
+            <img src="/images/organizacional.jpeg" alt="Consultoría Organizacional" class="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
           </div>
         </aside>
       </div>
@@ -198,61 +198,3 @@ import Accordion from './Accordion.astro';
     </div>
   </div>
 </section>
-
-<style>
-  /* ─── Service Row Layout ─── */
-  .service-row {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    align-items: start;
-  }
-
-  @media (min-width: 1024px) {
-    .service-row {
-      grid-template-columns: 1fr 260px;
-      gap: 3rem;
-    }
-  }
-
-  /* ─── Content Column ─── */
-  .service-content {
-    min-width: 0; /* Prevent flex/grid blowout */
-  }
-
-  /* ─── Image Column ─── */
-  .service-image {
-    display: none;
-  }
-
-  @media (min-width: 1024px) {
-    .service-image {
-      display: block;
-      position: sticky;
-      top: 8rem;
-      width: 260px;
-      flex-shrink: 0;
-    }
-  }
-
-  /* ─── Image Frame — locked 3:4 ratio ─── */
-  .service-image-frame {
-    position: relative;
-    width: 260px;
-    height: 347px; /* 260 × (4/3) */
-    border-radius: 1rem;
-    overflow: hidden;
-    background-color: #f5f5f5;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-  }
-
-  /* ─── Image fills the frame, never escapes ─── */
-  .service-img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-</style>
