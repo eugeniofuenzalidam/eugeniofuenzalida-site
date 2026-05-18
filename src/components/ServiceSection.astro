@@ -13,14 +13,15 @@ import Accordion from './Accordion.astro';
 
     <div class="space-y-24">
       
-      <div>
-        <div class="flex items-center gap-4 mb-8">
-          <span class="text-sm font-semibold tracking-widest text-neutral-300 uppercase">01</span>
-          <h3 class="text-3xl md:text-4xl font-semibold tracking-tight text-black">Psicología</h3>
-          <div class="flex-1 h-px bg-neutral-200"></div>
-        </div>
-
-        <div class="grid lg:grid-cols-[1fr_300px] gap-8 lg:gap-12 items-start">
+      <!-- Psicología -->
+      <div class="grid md:grid-cols-[1fr_280px] lg:grid-cols-[1fr_300px] gap-8 lg:gap-12 items-start">
+        <div class="space-y-6">
+          <div class="flex items-center gap-4 mb-2">
+            <span class="text-sm font-semibold tracking-widest text-neutral-300 uppercase">01</span>
+            <h3 class="text-3xl md:text-4xl font-semibold tracking-tight text-black">Psicología</h3>
+            <div class="flex-1 h-px bg-neutral-200"></div>
+          </div>
+          
           <div class="space-y-3">
             <Accordion 
               title="Psicología integral orientada a resultados"
@@ -75,96 +76,96 @@ import Accordion from './Accordion.astro';
               <span class="text-xs font-medium text-neutral-400 bg-white px-3 py-1 rounded-full border border-neutral-100">Próximamente</span>
             </div>
           </div>
-
-          <div class="w-full max-w-[300px] mx-auto mt-8 lg:mt-0 lg:sticky lg:top-28">
-            <div class="aspect-[3/4] w-full rounded-2xl overflow-hidden bg-neutral-100 shadow-lg">
-              <img src="/images/psicologia.jpeg" alt="Psicología" class="w-full h-full object-cover" loading="lazy" />
-            </div>
+        </div>
+        <div class="w-full max-w-[280px] ml-auto mt-8 md:mt-0 sticky top-28">
+          <div class="aspect-[3/4] w-full rounded-2xl overflow-hidden bg-neutral-100 shadow-lg">
+            <img src="/images/psicologia.jpeg" alt="Psicología" class="w-full h-full object-cover" loading="lazy" />
           </div>
         </div>
       </div>
 
-      <div>
-        <div class="flex items-center gap-4 mb-8">
-          <span class="text-sm font-semibold tracking-widest text-neutral-300 uppercase">02</span>
-          <h3 class="text-3xl md:text-4xl font-semibold tracking-tight text-black">Desarrollo Profesional</h3>
-          <div class="flex-1 h-px bg-neutral-200"></div>
-        </div>
-
-        <div class="grid lg:grid-cols-[1fr_300px] gap-8 lg:gap-12 items-start">
+      <!-- Desarrollo Profesional -->
+      <div class="grid md:grid-cols-[1fr_280px] lg:grid-cols-[1fr_300px] gap-8 lg:gap-12 items-start">
+        <div class="space-y-6">
+          <div class="flex items-center gap-4 mb-2">
+            <span class="text-sm font-semibold tracking-widest text-neutral-300 uppercase">02</span>
+            <h3 class="text-3xl md:text-4xl font-semibold tracking-tight text-black">Desarrollo Profesional</h3>
+            <div class="flex-1 h-px bg-neutral-200"></div>
+          </div>
+          
           <div class="space-y-3">
             <Accordion 
               title="Trabaja con Propósito"
               price="30.000"
               bookingService="Trabaja con Propósito"
             >
-                <div class="space-y-3 text-neutral-600 font-light pt-2">
-                  <p>Programa basado en Entrevista Motivacional para descubrir tu vocación y alinear tu carrera con tus valores y fortalezas.</p>
-                  <ul class="list-disc list-inside space-y-1">
-                    <li>Exploración de valores y motivaciones profundas</li>
-                    <li>Mapeo de fortalezas y áreas de crecimiento</li>
-                    <li>Plan de acción personalizado con metas SMART</li>
-                  </ul>
-                </div>
-              </Accordion>
+              <div class="space-y-3 text-neutral-600 font-light pt-2">
+                <p>Programa basado en Entrevista Motivacional para descubrir tu vocación y alinear tu carrera con tus valores y fortalezas.</p>
+                <ul class="list-disc list-inside space-y-1">
+                  <li>Exploración de valores y motivaciones profundas</li>
+                  <li>Mapeo de fortalezas y áreas de crecimiento</li>
+                  <li>Plan de acción personalizado con metas SMART</li>
+                </ul>
+              </div>
+            </Accordion>
 
-              <Accordion 
-                title="Paquete de 4 sesiones: Encuentra un buen trabajo"
-                price="100.000"
-                bookingService="Paquete de 4 sesiones: Encuentra un buen trabajo"
-              >
-                <div class="space-y-3 text-neutral-600 font-light pt-2">
-                  <p>Estrategias prácticas para posicionarte en el mercado laboral:</p>
-                  <ul class="list-disc list-inside space-y-1">
-                    <li>Optimización de perfil profesional y CV</li>
-                    <li>Estrategias de networking efectivo</li>
-                    <li>Preparación para entrevistas con técnicas asertivas</li>
-                    <li>Gestión de marca personal digital</li>
-                  </ul>
-                </div>
-              </Accordion>
+            <Accordion 
+              title="Paquete de 4 sesiones: Encuentra un buen trabajo"
+              price="100.000"
+              bookingService="Paquete de 4 sesiones: Encuentra un buen trabajo"
+            >
+              <div class="space-y-3 text-neutral-600 font-light pt-2">
+                <p>Estrategias prácticas para posicionarte en el mercado laboral:</p>
+                <ul class="list-disc list-inside space-y-1">
+                  <li>Optimización de perfil profesional y CV</li>
+                  <li>Estrategias de networking efectivo</li>
+                  <li>Preparación para entrevistas con técnicas asertivas</li>
+                  <li>Gestión de marca personal digital</li>
+                </ul>
+              </div>
+            </Accordion>
 
-              <Accordion title="Liderazgo y Trabajo en Equipos">
-                <div class="space-y-3 text-neutral-600 font-light pt-2">
-                  <p>Desarrollo de competencias de liderazgo y colaboración:</p>
-                  <ul class="list-disc list-inside space-y-1">
-                    <li>Estilos de liderazgo y su impacto en el equipo</li>
-                    <li>Comunicación asertiva y feedback constructivo</li>
-                    <li>Resolución de conflictos y negociación</li>
-                    <li>Inteligencia emocional aplicada al liderazgo</li>
-                  </ul>
-                </div>
-              </Accordion>
+            <Accordion title="Liderazgo y Trabajo en Equipos">
+              <div class="space-y-3 text-neutral-600 font-light pt-2">
+                <p>Desarrollo de competencias de liderazgo y colaboración:</p>
+                <ul class="list-disc list-inside space-y-1">
+                  <li>Estilos de liderazgo y su impacto en el equipo</li>
+                  <li>Comunicación asertiva y feedback constructivo</li>
+                  <li>Resolución de conflictos y negociación</li>
+                  <li>Inteligencia emocional aplicada al liderazgo</li>
+                </ul>
+              </div>
+            </Accordion>
 
-              <Accordion title="Bienestar y Alto Desempeño">
-                <div class="space-y-3 text-neutral-600 font-light pt-2">
-                  <p>Programa integral para mantener un rendimiento sostenido sin sacrificar la salud:</p>
-                  <ul class="list-disc list-inside space-y-1">
-                    <li>Gestión del estrés y prevención del burnout</li>
-                    <li>Higiene del sueño y recuperación</li>
-                    <li>Equilibrio trabajo-vida personal</li>
-                    <li>Rutinas de alto rendimiento basadas en evidencia</li>
-                  </ul>
-                </div>
-              </Accordion>
+            <Accordion title="Bienestar y Alto Desempeño">
+              <div class="space-y-3 text-neutral-600 font-light pt-2">
+                <p>Programa integral para mantener un rendimiento sostenido sin sacrificar la salud:</p>
+                <ul class="list-disc list-inside space-y-1">
+                  <li>Gestión del estrés y prevención del burnout</li>
+                  <li>Higiene del sueño y recuperación</li>
+                  <li>Equilibrio trabajo-vida personal</li>
+                  <li>Rutinas de alto rendimiento basadas en evidencia</li>
+                </ul>
+              </div>
+            </Accordion>
           </div>
-
-          <div class="w-full max-w-[300px] mx-auto mt-8 lg:mt-0 lg:sticky lg:top-28">
-            <div class="aspect-[3/4] w-full rounded-2xl overflow-hidden bg-neutral-100 shadow-lg">
-              <img src="/images/desarrollo-profesional.jpg" alt="Desarrollo Profesional" class="w-full h-full object-cover" loading="lazy" />
-            </div>
+        </div>
+        <div class="w-full max-w-[280px] ml-auto mt-8 md:mt-0 sticky top-28">
+          <div class="aspect-[3/4] w-full rounded-2xl overflow-hidden bg-neutral-100 shadow-lg">
+            <img src="/images/desarrollo-profesional.jpg" alt="Desarrollo Profesional" class="w-full h-full object-cover" loading="lazy" />
           </div>
         </div>
       </div>
 
-      <div>
-        <div class="flex items-center gap-4 mb-8">
-          <span class="text-sm font-semibold tracking-widest text-neutral-300 uppercase">03</span>
-          <h3 class="text-3xl md:text-4xl font-semibold tracking-tight text-black">Consultoría Organizacional</h3>
-          <div class="flex-1 h-px bg-neutral-200"></div>
-        </div>
-
-        <div class="grid lg:grid-cols-[1fr_300px] gap-8 lg:gap-12 items-start">
+      <!-- Consultoría Organizacional -->
+      <div class="grid md:grid-cols-[1fr_280px] lg:grid-cols-[1fr_300px] gap-8 lg:gap-12 items-start">
+        <div class="space-y-6">
+          <div class="flex items-center gap-4 mb-2">
+            <span class="text-sm font-semibold tracking-widest text-neutral-300 uppercase">03</span>
+            <h3 class="text-3xl md:text-4xl font-semibold tracking-tight text-black">Consultoría Organizacional</h3>
+            <div class="flex-1 h-px bg-neutral-200"></div>
+          </div>
+          
           <div class="space-y-3">
             <Accordion title="Automatización de Procesos">
               <p class="text-neutral-600 font-light pt-2">Diagnóstico e implementación de soluciones tecnológicas para optimizar procesos internos de tu organización. Reducción de tareas manuales repetitivas, integración de herramientas digitales y diseño de flujos de trabajo eficientes.</p>
@@ -190,11 +191,10 @@ import Accordion from './Accordion.astro';
               <p class="text-neutral-600 font-light pt-2">Implementación de sistemas de medición, feedback y mejora continua para maximizar el rendimiento organizacional. KPIs, OKRs y dashboards de desempeño personalizados.</p>
             </Accordion>
           </div>
-
-          <div class="w-full max-w-[300px] mx-auto mt-8 lg:mt-0 lg:sticky lg:top-28">
-            <div class="aspect-[3/4] w-full rounded-2xl overflow-hidden bg-neutral-100 shadow-lg">
-              <img src="/images/organizacional.jpeg" alt="Consultoría Organizacional" class="w-full h-full object-cover object-center" loading="lazy" />
-            </div>
+        </div>
+        <div class="w-full max-w-[280px] ml-auto mt-8 md:mt-0 sticky top-28">
+          <div class="aspect-[3/4] w-full rounded-2xl overflow-hidden bg-neutral-100 shadow-lg">
+            <img src="/images/organizacional.jpeg" alt="Consultoría Organizacional" class="w-full h-full object-cover object-center" loading="lazy" />
           </div>
         </div>
       </div>
