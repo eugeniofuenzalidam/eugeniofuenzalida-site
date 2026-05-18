@@ -2,8 +2,8 @@
 import Accordion from './Accordion.astro';
 ---
 
-<section id="servicios" class="py-32 bg-white px-6">
-  <div class="max-w-5xl mx-auto">
+<section id="servicios" class="py-32 bg-white">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-20">
       <h2 class="text-4xl md:text-5xl font-semibold tracking-tight mb-6">Servicios.</h2>
       <p class="text-xl text-neutral-500 max-w-2xl mx-auto font-light leading-relaxed">
@@ -11,42 +11,39 @@ import Accordion from './Accordion.astro';
       </p>
     </div>
 
-    <div class="space-y-32">
+    <div class="space-y-24">
       
-      <!-- Psicología -->
-      <div class="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
-        <div class="flex-1 w-full space-y-6">
-          <div class="flex items-center gap-4 mb-2">
-            <span class="text-sm font-semibold tracking-widest text-neutral-300 uppercase">01</span>
-            <h3 class="text-3xl md:text-4xl font-semibold tracking-tight text-black">Psicología</h3>
+      <!-- ======= Psicología ======= -->
+      <div class="service-row">
+        <!-- Content col -->
+        <div class="service-content">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="text-xs font-bold tracking-widest text-neutral-300 uppercase">01</span>
+            <h3 class="text-2xl md:text-3xl font-semibold tracking-tight text-black">Psicología</h3>
             <div class="flex-1 h-px bg-neutral-200"></div>
           </div>
-          
           <div class="space-y-3">
             <Accordion 
               title="Psicología integral orientada a resultados"
               price="30.000"
               bookingService="Psicología integral orientada a resultados"
             >
-              <div class="space-y-6 text-neutral-600 font-light pt-2">
+              <div class="space-y-4 text-neutral-600 font-light">
                 <div>
-                  <h4 class="font-medium text-neutral-900 mb-2">Consolidación — Base de Trabajo</h4>
-                  <p class="mb-3">Primera cita de evaluación integral para establecer tu línea base y definir objetivos claros.</p>
+                  <h4 class="font-medium text-neutral-900 mb-1">Consolidación — Base de Trabajo</h4>
+                  <p>Primera cita de evaluación integral para establecer tu línea base y definir objetivos claros.</p>
                 </div>
-
                 <div>
-                  <h4 class="font-medium text-neutral-900 mb-2">Propósito — Enfoque Carl Rogers</h4>
-                  <p>Exploración de tu verdadero potencial a través del enfoque centrado en la persona. Conectamos con tu autoconcepto, congruencia y tendencia actualizante para definir un propósito auténtico y motivador.</p>
+                  <h4 class="font-medium text-neutral-900 mb-1">Propósito — Enfoque Carl Rogers</h4>
+                  <p>Exploración de tu verdadero potencial a través del enfoque centrado en la persona.</p>
                 </div>
-
                 <div>
-                  <h4 class="font-medium text-neutral-900 mb-2">Habilidades Prácticas — DBT</h4>
-                  <p class="mb-3">Entrenamiento en las cuatro áreas fundamentales de la Terapia Dialéctico-Conductual:</p>
-                  <ul class="space-y-2">
+                  <h4 class="font-medium text-neutral-900 mb-1">Habilidades Prácticas — DBT</h4>
+                  <ul class="space-y-1 mt-2">
                     <li><span class="font-medium text-neutral-900">Mindfulness:</span> Atención plena al momento presente.</li>
-                    <li><span class="font-medium text-neutral-900">Tolerancia al Malestar:</span> Estrategias para enfrentar situaciones difíciles.</li>
-                    <li><span class="font-medium text-neutral-900">Regulación Emocional:</span> Herramientas para gestionar emociones intensas.</li>
-                    <li><span class="font-medium text-neutral-900">Eficacia Interpersonal:</span> Comunicación asertiva y gestión de relaciones.</li>
+                    <li><span class="font-medium text-neutral-900">Tolerancia al Malestar:</span> Estrategias para situaciones difíciles.</li>
+                    <li><span class="font-medium text-neutral-900">Regulación Emocional:</span> Herramientas para emociones intensas.</li>
+                    <li><span class="font-medium text-neutral-900">Eficacia Interpersonal:</span> Comunicación asertiva.</li>
                   </ul>
                 </div>
               </div>
@@ -57,51 +54,48 @@ import Accordion from './Accordion.astro';
               price="30.000"
               bookingService="Coaching Deportivo Alto Rendimiento"
             >
-              <div class="space-y-4 text-neutral-600 font-light pt-2">
-                <div class="w-full max-w-sm h-48 sm:h-64 rounded-xl overflow-hidden bg-neutral-100 mb-4">
-                  <img src="/images/deporte.jpeg" alt="Psicología Deportiva" class="w-full h-full object-cover" loading="lazy" />
-                </div>
-                <p>Optimización del rendimiento mental en deportistas de todos los niveles. Combinamos habilidades DBT con técnicas específicas del ámbito deportivo.</p>
-                <ul class="space-y-2">
+              <div class="space-y-3 text-neutral-600 font-light">
+                <p>Optimización del rendimiento mental en deportistas de todos los niveles.</p>
+                <ul class="space-y-1">
                   <li><span class="font-medium text-neutral-900">Mindfulness deportivo:</span> Enfoque y concentración en la competición.</li>
-                  <li><span class="font-medium text-neutral-900">Regulación emocional:</span> Manejo de la presión competitiva y ansiedad.</li>
-                  <li><span class="font-medium text-neutral-900">Visualización:</span> Preparación mental para escenarios competitivos.</li>
-                  <li><span class="font-medium text-neutral-900">Resiliencia:</span> Recuperación mental tras lesiones y derrotas.</li>
+                  <li><span class="font-medium text-neutral-900">Regulación emocional:</span> Manejo de la presión competitiva.</li>
+                  <li><span class="font-medium text-neutral-900">Visualización:</span> Preparación mental para competencias.</li>
+                  <li><span class="font-medium text-neutral-900">Resiliencia:</span> Recuperación tras lesiones y derrotas.</li>
                 </ul>
               </div>
             </Accordion>
-            
-            <div class="px-6 py-5 bg-neutral-50/60 rounded-xl flex justify-between items-center">
-              <span class="font-medium text-neutral-400">Psicología Clínica</span>
-              <span class="text-xs font-medium text-neutral-400 bg-white px-3 py-1 rounded-full border border-neutral-100">Próximamente</span>
+
+            <div class="px-5 py-4 bg-neutral-50 rounded-xl flex justify-between items-center">
+              <span class="font-medium text-neutral-400 text-sm">Psicología Clínica</span>
+              <span class="text-xs text-neutral-400 bg-white px-3 py-1 rounded-full border border-neutral-200">Próximamente</span>
             </div>
           </div>
         </div>
 
-        <div class="hidden lg:block w-72 shrink-0 sticky top-32">
-          <div class="relative w-full aspect-[3/4] rounded-2xl overflow-hidden bg-neutral-100 shadow-md">
-            <img src="/images/psicologia.jpeg" alt="Psicología" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+        <!-- Image col — desktop only -->
+        <aside class="service-image">
+          <div class="service-image-frame">
+            <img src="/images/psicologia.jpeg" alt="Psicología" class="service-img" loading="lazy" />
           </div>
-        </div>
+        </aside>
       </div>
 
-      <!-- Desarrollo Profesional -->
-      <div class="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
-        <div class="flex-1 w-full space-y-6">
-          <div class="flex items-center gap-4 mb-2">
-            <span class="text-sm font-semibold tracking-widest text-neutral-300 uppercase">02</span>
-            <h3 class="text-3xl md:text-4xl font-semibold tracking-tight text-black">Desarrollo Profesional</h3>
+      <!-- ======= Desarrollo Profesional ======= -->
+      <div class="service-row">
+        <div class="service-content">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="text-xs font-bold tracking-widest text-neutral-300 uppercase">02</span>
+            <h3 class="text-2xl md:text-3xl font-semibold tracking-tight text-black">Desarrollo Profesional</h3>
             <div class="flex-1 h-px bg-neutral-200"></div>
           </div>
-          
           <div class="space-y-3">
             <Accordion 
               title="Trabaja con Propósito"
               price="30.000"
               bookingService="Trabaja con Propósito"
             >
-              <div class="space-y-3 text-neutral-600 font-light pt-2">
-                <p>Programa basado en Entrevista Motivacional para descubrir tu vocación y alinear tu carrera con tus valores y fortalezas.</p>
+              <div class="space-y-2 text-neutral-600 font-light">
+                <p>Programa basado en Entrevista Motivacional para descubrir tu vocación.</p>
                 <ul class="list-disc list-inside space-y-1">
                   <li>Exploración de valores y motivaciones profundas</li>
                   <li>Mapeo de fortalezas y áreas de crecimiento</li>
@@ -115,7 +109,7 @@ import Accordion from './Accordion.astro';
               price="100.000"
               bookingService="Paquete de 4 sesiones: Encuentra un buen trabajo"
             >
-              <div class="space-y-3 text-neutral-600 font-light pt-2">
+              <div class="space-y-2 text-neutral-600 font-light">
                 <p>Estrategias prácticas para posicionarte en el mercado laboral:</p>
                 <ul class="list-disc list-inside space-y-1">
                   <li>Optimización de perfil profesional y CV</li>
@@ -127,7 +121,7 @@ import Accordion from './Accordion.astro';
             </Accordion>
 
             <Accordion title="Liderazgo y Trabajo en Equipos">
-              <div class="space-y-3 text-neutral-600 font-light pt-2">
+              <div class="space-y-2 text-neutral-600 font-light">
                 <p>Desarrollo de competencias de liderazgo y colaboración:</p>
                 <ul class="list-disc list-inside space-y-1">
                   <li>Estilos de liderazgo y su impacto en el equipo</li>
@@ -139,8 +133,8 @@ import Accordion from './Accordion.astro';
             </Accordion>
 
             <Accordion title="Bienestar y Alto Desempeño">
-              <div class="space-y-3 text-neutral-600 font-light pt-2">
-                <p>Programa integral para mantener un rendimiento sostenido sin sacrificar la salud:</p>
+              <div class="space-y-2 text-neutral-600 font-light">
+                <p>Programa integral para un rendimiento sostenido:</p>
                 <ul class="list-disc list-inside space-y-1">
                   <li>Gestión del estrés y prevención del burnout</li>
                   <li>Higiene del sueño y recuperación</li>
@@ -152,34 +146,33 @@ import Accordion from './Accordion.astro';
           </div>
         </div>
 
-        <div class="hidden lg:block w-72 shrink-0 sticky top-32">
-          <div class="relative w-full aspect-[3/4] rounded-2xl overflow-hidden bg-neutral-100 shadow-md">
-            <img src="/images/desarrollo-profesional.jpg" alt="Desarrollo Profesional" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+        <aside class="service-image">
+          <div class="service-image-frame">
+            <img src="/images/desarrollo-profesional.jpg" alt="Desarrollo Profesional" class="service-img" loading="lazy" />
           </div>
-        </div>
+        </aside>
       </div>
 
-      <!-- Consultoría Organizacional -->
-      <div class="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
-        <div class="flex-1 w-full space-y-6">
-          <div class="flex items-center gap-4 mb-2">
-            <span class="text-sm font-semibold tracking-widest text-neutral-300 uppercase">03</span>
-            <h3 class="text-3xl md:text-4xl font-semibold tracking-tight text-black">Consultoría Organizacional</h3>
+      <!-- ======= Consultoría Organizacional ======= -->
+      <div class="service-row">
+        <div class="service-content">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="text-xs font-bold tracking-widest text-neutral-300 uppercase">03</span>
+            <h3 class="text-2xl md:text-3xl font-semibold tracking-tight text-black">Consultoría Organizacional</h3>
             <div class="flex-1 h-px bg-neutral-200"></div>
           </div>
-          
           <div class="space-y-3">
             <Accordion title="Automatización de Procesos">
-              <p class="text-neutral-600 font-light pt-2">Diagnóstico e implementación de soluciones tecnológicas para optimizar procesos internos de tu organización. Reducción de tareas manuales repetitivas, integración de herramientas digitales y diseño de flujos de trabajo eficientes.</p>
+              <p class="text-neutral-600 font-light">Diagnóstico e implementación de soluciones tecnológicas para optimizar procesos internos. Reducción de tareas manuales repetitivas e integración de herramientas digitales.</p>
             </Accordion>
 
             <Accordion title="Diagnóstico Organizacional con IA">
-              <p class="text-neutral-600 font-light pt-2">Evaluación integral del clima organizacional, cultura y desempeño utilizando inteligencia artificial para análisis de datos y generación de insights accionables.</p>
+              <p class="text-neutral-600 font-light">Evaluación integral del clima organizacional, cultura y desempeño usando inteligencia artificial para análisis y generación de insights accionables.</p>
             </Accordion>
 
             <Accordion title="DNC — Desarrollo de Nuevas Competencias">
-              <div class="space-y-3 text-neutral-600 font-light pt-2">
-                <p>Programa de capacitación para equipos que buscan adaptarse a los desafíos del entorno actual:</p>
+              <div class="space-y-2 text-neutral-600 font-light">
+                <p>Programa de capacitación para equipos:</p>
                 <ul class="list-disc list-inside space-y-1">
                   <li>Competencias digitales y pensamiento computacional</li>
                   <li>Adaptabilidad y aprendizaje continuo</li>
@@ -190,18 +183,76 @@ import Accordion from './Accordion.astro';
             </Accordion>
 
             <Accordion title="Optimización de Resultados y Desempeño">
-              <p class="text-neutral-600 font-light pt-2">Implementación de sistemas de medición, feedback y mejora continua para maximizar el rendimiento organizacional. KPIs, OKRs y dashboards de desempeño personalizados.</p>
+              <p class="text-neutral-600 font-light">Implementación de sistemas de medición, feedback y mejora continua. KPIs, OKRs y dashboards de desempeño personalizados.</p>
             </Accordion>
           </div>
         </div>
 
-        <div class="hidden lg:block w-72 shrink-0 sticky top-32">
-          <div class="relative w-full aspect-[3/4] rounded-2xl overflow-hidden bg-neutral-100 shadow-md">
-            <img src="/images/organizacional.jpeg" alt="Consultoría Organizacional" class="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+        <aside class="service-image">
+          <div class="service-image-frame">
+            <img src="/images/organizacional.jpeg" alt="Consultoría Organizacional" class="service-img object-center" loading="lazy" />
           </div>
-        </div>
+        </aside>
       </div>
 
     </div>
   </div>
 </section>
+
+<style>
+  /* ─── Service Row Layout ─── */
+  .service-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  @media (min-width: 1024px) {
+    .service-row {
+      grid-template-columns: 1fr 260px;
+      gap: 3rem;
+    }
+  }
+
+  /* ─── Content Column ─── */
+  .service-content {
+    min-width: 0; /* Prevent flex/grid blowout */
+  }
+
+  /* ─── Image Column ─── */
+  .service-image {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .service-image {
+      display: block;
+      position: sticky;
+      top: 8rem;
+      width: 260px;
+      flex-shrink: 0;
+    }
+  }
+
+  /* ─── Image Frame — locked 3:4 ratio ─── */
+  .service-image-frame {
+    position: relative;
+    width: 260px;
+    height: 347px; /* 260 × (4/3) */
+    border-radius: 1rem;
+    overflow: hidden;
+    background-color: #f5f5f5;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+
+  /* ─── Image fills the frame, never escapes ─── */
+  .service-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+</style>
