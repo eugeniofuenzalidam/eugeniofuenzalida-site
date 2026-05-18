@@ -1,20 +1,34 @@
 ---
 interface Props {
   title: string;
-  id?: string;
+  price?: string;
+  bookingService?: string;
 }
 
-const { title, id } = Astro.props;
+const { title, price, bookingService } = Astro.props;
 ---
 
-<div class="border-b border-neutral-100 overflow-hidden group/accordion">
+<div class="overflow-hidden group/accordion">
   <button
-    class="accordion-trigger w-full flex items-center justify-between py-6 bg-transparent hover:bg-neutral-50/50 transition-colors text-left"
+    class="accordion-trigger w-full flex items-center justify-between py-5 px-6 bg-neutral-50/60 hover:bg-neutral-100/80 rounded-xl transition-colors duration-200 text-left cursor-pointer"
     data-accordion-trigger
   >
-    <span class="text-lg font-medium text-neutral-900 group-hover/accordion:translate-x-2 transition-transform duration-300">{title}</span>
+    <div class="flex-1 flex flex-wrap items-center justify-between gap-4 mr-4 min-w-0">
+      <span class="text-base font-medium text-neutral-900 group-hover/accordion:text-black transition-colors duration-200 flex-1 min-w-[200px]">{title}</span>
+      {bookingService ? (
+        <button
+          type="button"
+          data-booking-service={bookingService}
+          class="booking-btn px-4 py-2 bg-black text-white text-xs font-semibold rounded-lg hover:bg-neutral-800 transition-all cursor-pointer whitespace-nowrap shrink-0"
+        >
+          Agendar {price ? `— $${price}` : ''}
+        </button>
+      ) : price ? (
+        <span class="text-sm font-medium text-neutral-400 whitespace-nowrap shrink-0">${price}</span>
+      ) : null}
+    </div>
     <svg
-      class="accordion-icon w-5 h-5 text-neutral-400 transition-transform duration-300"
+      class="accordion-icon w-5 h-5 text-neutral-400 group-hover/accordion:text-neutral-600 transition-all duration-300 flex-shrink-0"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
@@ -22,9 +36,23 @@ const { title, id } = Astro.props;
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
     </svg>
   </button>
-  <div class="accordion-content hidden pb-6 pr-6" data-accordion-content>
-    <div class="text-neutral-600 font-light leading-relaxed">
+  <div class="accordion-content hidden" data-accordion-content>
+    <div class="text-neutral-600 font-light leading-relaxed px-6 pb-5 pt-3">
       <slot />
     </div>
   </div>
 </div>
+
+<script>
+  // Handle booking button click
+  document.querySelectorAll('.booking-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation(); // Prevent accordion from toggling
+      const service = btn.getAttribute('data-booking-service');
+      if (service) {
+        // Dispatch event to BookingCalendar
+        document.dispatchEvent(new CustomEvent('select-service', { detail: service }));
+      }
+    });
+  });
+</script>

@@ -8,8 +8,8 @@ import ServiceSection from '../components/ServiceSection.astro';
 import Newsletter from '../components/Newsletter.astro';
 import ImageGrid from '../components/ImageGrid.astro';
 import Footer from '../components/Footer.astro';
-import LeadFilterForm from '../components/LeadFilterForm';
-import BookingCalendar from '../components/BookingCalendar';
+import BookingSection from '../components/BookingSection.astro';
+import ReviewsCarousel from '../components/ReviewsCarousel.astro';
 ---
 
 <Layout title="Eugenio Fuenzalida | Alto Rendimiento">
@@ -17,30 +17,11 @@ import BookingCalendar from '../components/BookingCalendar';
     <Navbar />
     <main>
       <Hero />
+      <ReviewsCarousel />
       <About />
-      <EnfoqueSection />
       <ServiceSection />
-
-      <section id="agendar" class="py-32 bg-white px-6">
-        <div class="max-w-6xl mx-auto">
-          <div class="text-center mb-20">
-            <h2 class="text-4xl md:text-5xl font-semibold tracking-tight mb-6">Agendar.</h2>
-            <p class="text-xl text-neutral-500 max-w-2xl mx-auto font-light leading-relaxed">
-              Inicia tu proceso de transformación hacia el alto rendimiento.
-            </p>
-          </div>
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-4xl mx-auto">
-            <div>
-              <h3 class="text-xl font-medium tracking-tight text-black mb-6">Cuéntanos sobre ti</h3>
-              <LeadFilterForm client:visible />
-            </div>
-            <div>
-              <h3 class="text-xl font-medium tracking-tight text-black mb-6">Calendario</h3>
-              <BookingCalendar client:visible />
-            </div>
-          </div>
-        </div>
-      </section>
+      <EnfoqueSection />
+      <BookingSection />
 
       <Newsletter />
       <ImageGrid />

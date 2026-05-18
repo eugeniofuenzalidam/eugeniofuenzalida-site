@@ -1,0 +1,223 @@
+---
+const reviews = [
+  {
+    name: "Valentina Morales",
+    rating: 5,
+    text: "Gracias a las sesiones de psicología deportiva, logré superar la ansiedad pre-competitiva que me tenía bloqueada hace meses. El enfoque con mindfulness y visualización cambió completamente mi rendimiento.",
+    service: "Psicología Deportiva",
+  },
+  {
+    name: "Sebastián Araya",
+    rating: 5,
+    text: "El programa de desarrollo profesional me ayudó a encontrar claridad en un momento de incertidumbre total. Pude alinear mi carrera con mis valores reales y hoy me siento mucho más motivado con lo que hago.",
+    service: "Trabaja con Propósito",
+  },
+  {
+    name: "Constanza Soto",
+    rating: 5,
+    text: "Las herramientas DBT que aprendí en las sesiones me han sido útiles no solo personalmente sino también en mi trabajo. La regulación emocional y la eficacia interpersonal marcan una diferencia real.",
+    service: "Psicología Integral",
+  },
+  {
+    name: "Matías Contreras",
+    rating: 5,
+    text: "Implementamos el diagnóstico organizacional con IA en nuestra empresa y los resultados fueron inmediatos. Identificamos problemas que llevábamos meses sin poder nombrar. Muy recomendable.",
+    service: "Consultoría Organizacional",
+  },
+  {
+    name: "Isidora Muñoz",
+    rating: 5,
+    text: "El programa de bienestar y alto desempeño me dio herramientas concretas para manejar el estrés sin caer en burnout. Las rutinas basadas en evidencia realmente funcionan cuando uno las aplica con compromiso.",
+    service: "Bienestar y Alto Desempeño",
+  },
+  {
+    name: "Francisco Bravo",
+    rating: 4,
+    text: "Buen programa de liderazgo. Me sirvió especialmente la parte de comunicación asertiva y feedback constructivo. Hubiera querido más sesiones prácticas, pero el contenido es sólido y aplicable desde el día uno.",
+    service: "Liderazgo y Trabajo en Equipos",
+  },
+  {
+    name: "Camila Figueroa",
+    rating: 5,
+    text: "Después de meses sintiendo que mi carrera no tenía dirección, las sesiones me ayudaron a descubrir qué realmente me importa profesionalmente. El enfoque con entrevista motivacional es increíblemente efectivo.",
+    service: "Trabaja con Propósito",
+  },
+  {
+    name: "Nicolás Valdés",
+    rating: 5,
+    text: "Como deportista profesional, necesitaba trabajar la resiliencia mental tras una lesión. Las sesiones de psicología deportiva me devolvieron la confianza y la capacidad de competir al máximo nivel.",
+    service: "Psicología Deportiva",
+  },
+  {
+    name: "Javiera Castillo",
+    rating: 5,
+    text: "La automatización de procesos que implementaron en nuestra organización nos ahorra más de 20 horas semanales. El diagnóstico fue preciso y la solución se adaptó perfectamente a nuestra realidad.",
+    service: "Automatización de Procesos",
+  },
+  {
+    name: "Diego Salazar",
+    rating: 5,
+    text: "La primera sesión de evaluación integral ya me dio una claridad que no tenía hace años. Sentí que Eugenio entiende realmente lo que necesitas y diseña un plan a medida. Totalmente recomendado.",
+    service: "Psicología Integral",
+  },
+];
+---
+
+<section id="resenas" class="pt-24 pb-8 bg-white px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-semibold tracking-tight mb-6">Experiencias de mis clientes.</h2>
+    </div>
+
+    <div class="relative">
+      <div class="overflow-hidden" id="reviews-viewport">
+        <div class="flex transition-transform duration-500 ease-out" id="reviews-track">
+          {reviews.map((review, i) => (
+            <div class="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 px-3">
+              <div class="bg-neutral-50 rounded-2xl p-6 h-full flex flex-col cursor-pointer hover:bg-neutral-100 transition-colors" data-review-card={i}>
+                <div class="flex gap-0.5 mb-3">
+                  {Array.from({ length: 5 }).map((_, j) => (
+                    <svg class={`w-4 h-4 ${j < review.rating ? 'text-amber-400' : 'text-neutral-200'}`} fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                    </svg>
+                  ))}
+                </div>
+
+                <div class="relative mb-3">
+                  <p class="text-neutral-600 font-light leading-relaxed line-clamp-2" data-review-preview={i}>"{review.text}"</p>
+                  <p class="text-neutral-600 font-light leading-relaxed hidden" data-review-full={i}>"{review.text}"</p>
+                </div>
+
+                <div class="border-t border-neutral-200 pt-4 mt-auto">
+                  <p class="font-medium text-neutral-900 text-sm">{review.name}</p>
+                  <p class="text-xs text-neutral-400">{review.service}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <button
+        id="review-prev"
+        aria-label="Reseña anterior"
+        class="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-10 h-10 items-center justify-center rounded-full bg-white border border-neutral-200 shadow-sm text-neutral-600 hover:text-black hover:border-neutral-300 transition-colors cursor-pointer z-10"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+      </button>
+      <button
+        id="review-next"
+        aria-label="Reseña siguiente"
+        class="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-10 h-10 items-center justify-center rounded-full bg-white border border-neutral-200 shadow-sm text-neutral-600 hover:text-black hover:border-neutral-300 transition-colors cursor-pointer z-10"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+      </button>
+
+      <div class="flex justify-center gap-2 mt-8 md:hidden" id="review-dots"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('[data-review-card]').forEach((card) => {
+    card.addEventListener('click', () => {
+      const i = card.getAttribute('data-review-card');
+      const preview = card.querySelector(`[data-review-preview="${i}"]`) as HTMLElement;
+      const full = card.querySelector(`[data-review-full="${i}"]`) as HTMLElement;
+      if (!preview || !full) return;
+      const isOpen = !full.classList.contains('hidden');
+      if (isOpen) {
+        full.classList.add('hidden');
+        preview.classList.remove('hidden');
+      } else {
+        preview.classList.add('hidden');
+        full.classList.remove('hidden');
+      }
+    });
+  });
+
+  const track = document.getElementById('reviews-track') as HTMLDivElement;
+  const viewport = document.getElementById('reviews-viewport') as HTMLDivElement;
+  const dotsContainer = document.getElementById('review-dots');
+  if (track && viewport) {
+    const totalCards = track.children.length;
+    let currentIndex = 0;
+    let cardsPerView = 3;
+
+    function getCardsPerView(): number {
+      if (window.innerWidth >= 1024) return 3;
+      if (window.innerWidth >= 768) return 2;
+      return 1;
+    }
+
+    function getMaxIndex(): number {
+      return Math.max(0, totalCards - cardsPerView);
+    }
+
+    function updateTrack(): void {
+      const cardWidth = 100 / cardsPerView;
+      track.style.transform = `translateX(-${currentIndex * cardWidth}%)`;
+      updateDots();
+    }
+
+    function updateDots(): void {
+      if (!dotsContainer) return;
+      const maxIdx = getMaxIndex();
+      dotsContainer.innerHTML = '';
+      for (let i = 0; i <= maxIdx; i++) {
+        const dot = document.createElement('button');
+        dot.className = `w-2 h-2 rounded-full transition-colors cursor-pointer ${i === currentIndex ? 'bg-neutral-900' : 'bg-neutral-300'}`;
+        dot.setAttribute('aria-label', `Ir a reseña ${i + 1}`);
+        dot.addEventListener('click', () => {
+          currentIndex = i;
+          updateTrack();
+        });
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    function goNext(): void {
+      currentIndex = currentIndex >= getMaxIndex() ? 0 : currentIndex + 1;
+      updateTrack();
+    }
+
+    function goPrev(): void {
+      currentIndex = currentIndex <= 0 ? getMaxIndex() : currentIndex - 1;
+      updateTrack();
+    }
+
+    const prevBtn = document.getElementById('review-prev');
+    const nextBtn = document.getElementById('review-next');
+    prevBtn?.addEventListener('click', goPrev);
+    nextBtn?.addEventListener('click', goNext);
+
+    let autoPlayTimer = setInterval(goNext, 5000);
+
+    viewport.addEventListener('mouseenter', () => clearInterval(autoPlayTimer));
+    viewport.addEventListener('mouseleave', () => {
+      autoPlayTimer = setInterval(goNext, 5000);
+    });
+
+    let touchStartX = 0;
+    viewport.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+      clearInterval(autoPlayTimer);
+    }, { passive: true });
+    viewport.addEventListener('touchend', (e) => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) {
+        diff > 0 ? goNext() : goPrev();
+      }
+      autoPlayTimer = setInterval(goNext, 5000);
+    }, { passive: true });
+
+    cardsPerView = getCardsPerView();
+    updateTrack();
+
+    window.addEventListener('resize', () => {
+      cardsPerView = getCardsPerView();
+      if (currentIndex > getMaxIndex()) currentIndex = getMaxIndex();
+      updateTrack();
+    });
+  }
+</script>
