@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "vault-eugeniofuenzalidaps": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@bitbonsai/mcpvault@latest",
+        "/Users/eugeniofuenzalida/projects/eugeniofuenzalidaps/.vault"
+      ]
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": [
+        "chrome-devtools-mcp@latest",
+        "--browser-url=http://127.0.0.1:9222",
+        "-y"
+      ]
+    }
+  }
+}
