@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { User, signOut } from "firebase/auth";
+import { signOut } from "firebase/auth";
+import type { User } from "firebase/auth";
 import { auth } from "../../lib/firebase";
 import { Users, Image as ImageIcon, LogOut, Menu, X } from "lucide-react";
 import { ClientsManager } from "./ClientsManager";
