@@ -1,15 +1,15 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 
-import tailwindcss from '@tailwindcss/vite';
-import react from '@astrojs/react';
-import sitemap from '@astrojs/sitemap';
+import tailwindcss from "@tailwindcss/vite";
+import react from "@astrojs/react";
+import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
-  site: 'https://eugeniofuenzalidaps.web.app',
-  trailingSlash: 'never',
+  site: "https://eugeniofuenzalidaps.web.app",
+  trailingSlash: "never",
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
   },
-  integrations: [react(), sitemap()]
+  integrations: [react(), sitemap()],
 });

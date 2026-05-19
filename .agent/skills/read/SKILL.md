@@ -21,6 +21,7 @@ vault-<project>.list("decisions")                # ADRs
 ```
 
 Buscá en este orden:
+
 - `episodes/` — qué se hizo, cuándo, qué archivos se tocaron, por qué
 - `decisions/` — ADRs (decisiones de arquitectura)
 - `context/claude-md.md` — snapshot de CLAUDE.md
@@ -45,15 +46,15 @@ Leé SOLO los archivos identificados en paso 2.
 
 ## Triggers rápidos
 
-| Pedido | Capas mínimas |
-|--------|---------------|
-| "Implementa X" | 1 (¿precedente?) → 2 → 3 |
-| "Bug en Y" | 1 (`search` "bug Y") → 2 (`callers_of`) → 3 |
-| "Revisá este diff" | 2 (`detect_changes` + `get_review_context`) — NO ir a 3 |
-| "¿Por qué existe Z?" | 1 (`decisions/`) |
-| "¿Qué rompe si cambio W?" | 2 (`get_impact_radius` + `get_affected_flows`) |
-| "Onboarding" | 1 (`00-INDEX.md` + `context/claude-md.md`) |
-| "Refactor grande" | 1 → 2 (`get_impact_radius`) → STOP, confirmar scope con usuario |
+| Pedido                    | Capas mínimas                                                   |
+| ------------------------- | --------------------------------------------------------------- |
+| "Implementa X"            | 1 (¿precedente?) → 2 → 3                                        |
+| "Bug en Y"                | 1 (`search` "bug Y") → 2 (`callers_of`) → 3                     |
+| "Revisá este diff"        | 2 (`detect_changes` + `get_review_context`) — NO ir a 3         |
+| "¿Por qué existe Z?"      | 1 (`decisions/`)                                                |
+| "¿Qué rompe si cambio W?" | 2 (`get_impact_radius` + `get_affected_flows`)                  |
+| "Onboarding"              | 1 (`00-INDEX.md` + `context/claude-md.md`)                      |
+| "Refactor grande"         | 1 → 2 (`get_impact_radius`) → STOP, confirmar scope con usuario |
 
 ## Setup necesario
 

@@ -29,26 +29,34 @@ files: [path/to/file1.ts, path/to/file2.ts]
 # <Resumen 1 línea, imperativo>
 
 ## Tarea
+
 Qué pidió el usuario (1-2 frases).
 
 ## Contexto consultado
+
 - Vault: <qué notas leíste>
 - Grafo: <qué nodos consultaste>
 - Read: <archivos efectivamente leídos>
 
 ## Cambios
+
 - `path/file.ts:142-178`: descripción breve
 - `path/other.ts`: ...
 
 ## Decisiones tomadas
+
 Qué elegiste hacer y POR QUÉ — lo que NO se ve en el diff.
+
 - ...
 
 ## Bugs / gotchas encontrados
+
 Cualquier cosa rara que la próxima sesión querría saber.
+
 - ...
 
 ## Pendientes
+
 - [ ] ...
 ```
 
@@ -65,22 +73,28 @@ files: [functions/src/routes/webhooks.ts]
 # Fix idempotencia webhook MercadoPago
 
 ## Tarea
+
 "Pagos duplicados desde el webhook MP".
 
 ## Contexto consultado
+
 - Vault: episodes/ no había precedente
 - Grafo: callers_of("processWebhookPayment") → 1 caller en webhooks.ts
 
 ## Cambios
+
 - `functions/src/routes/webhooks.ts:142-178`: envolví el chequeo de existencia + create en `runTransaction`.
 
 ## Decisiones tomadas
+
 Race condition entre dos webhooks idénticos llegando en <100ms — el chequeo de `mercadoPagoId` y el create no estaban en transacción. Fix mínimo en el handler, no agregué locks externos.
 
 ## Bugs / gotchas encontrados
+
 El campo `payerEmail` viene `undefined` cuando MP no propaga el email — ya documentado en CLAUDE.md, manejar con default vacío en el normalize.
 
 ## Pendientes
+
 - [ ] Agregar índice compuesto `(mercadoPagoId, type)` — no urgente, va en otra PR.
 ```
 
@@ -93,12 +107,14 @@ Numerar secuencialmente: buscá el último `ADR-NNN` en `decisions/` con `vault-
 Aplicá el template `~/.claude/skills/persistent-memory-graph/assets/adr-template.md`.
 
 ### Cuándo SÍ ADR
+
 - Elegiste una librería/patrón sobre alternativas
 - Cambiaste un contrato (esquema DB, formato API, formato de cookie)
 - Definiste convención que otros archivos van a seguir
 - Tradeoff explícito que vale la pena registrar
 
 ### Cuándo NO
+
 - Bugfix puntual (eso va solo en `episodes/`)
 - Refactor sin cambio de comportamiento
 - Cambio cosmético
@@ -116,6 +132,7 @@ Editá `00-INDEX.md`, sección `## Episodios`. Insertá la línea **en orden cro
 ```
 
 **Reglas para la descripción:**
+
 - Keywords concretos (nombres de archivos, IDs, errores específicos) — la línea es buscable con grep
 - Nunca genérica ("arreglé un bug", "fix import") — inútil para búsqueda
 - Si supersede a un episodio anterior, agregá `(supersede 2026-MM-DD-slug)` al final
@@ -149,11 +166,12 @@ grep -c "\[\[episodes/" .vault/00-INDEX.md          # enlazados en INDEX
 ```
 vault-<project>.list("episodes")
 ```
+
 El archivo recién creado debería aparecer. Si no, revisá que el MCP `vault-<project>` esté activo (`/read` con cualquier query falla si no lo está).
 
 ## Anti-patrones
 
-- "El cambio se ve en el diff, no hace falta guardarlo" → el diff no captura *por qué*. La próxima sesión no lo va a deducir.
+- "El cambio se ve en el diff, no hace falta guardarlo" → el diff no captura _por qué_. La próxima sesión no lo va a deducir.
 - Episodios genéricos ("arreglé un bug") → inútiles para búsqueda. Sé específico.
 - Persistir cada cambio trivial → ruido. Saltá tareas triviales (typo, formato).
 - Olvidar el ADR cuando corresponde → la decisión queda solo en `episodes/` (orden cronológico, difícil de encontrar).
@@ -163,6 +181,7 @@ El archivo recién creado debería aparecer. Si no, revisá que el MCP `vault-<p
 ## Setup necesario
 
 Igual que `/read` — `vault-<project>` activo en `.mcp.json`. Verificá con:
+
 ```bash
 bash ~/.claude/skills/persistent-memory-graph/scripts/check-status.sh
 ```

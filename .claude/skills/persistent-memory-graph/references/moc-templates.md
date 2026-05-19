@@ -13,11 +13,12 @@ created: YYYY-MM-DD
 # Arquitectura — {{PROJECT_NAME}}
 
 ## Diagrama de alto nivel
-
 ```
+
 [Browser] → [Edge/CDN] → [App] → [DB]
-                          ↓
-                       [Workers]
+↓
+[Workers]
+
 ```
 
 ## Componentes
@@ -70,24 +71,30 @@ tags: [session]
 # Sesión: <título>
 
 ## Tarea
+
 ¿Qué pidió el usuario?
 
 ## Capas consultadas
+
 - Memoria: ...
 - Grafo: ...
 - Notas: ...
 - Read: archivos específicos
 
 ## Cambios
+
 - `path/file.ts`: ...
 
 ## Decisiones
+
 - ...
 
 ## Pendientes
+
 - [ ] ...
 
 ## Persistido en Graphiti
+
 Sí / No — id del episodio si aplica
 ```
 

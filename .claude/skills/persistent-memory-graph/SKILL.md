@@ -13,11 +13,11 @@ Re-leer archivos en cada sesión agota contexto y cuesta tokens. La comunidad (A
 
 ## Las 3 capas
 
-| Capa | Sistema | MCP | Qué guarda | Cuándo consultar |
-|------|---------|-----|------------|------------------|
-| **1. Episódica** | Graphiti (Zep) sobre FalkorDB | `graphiti-memory` | Decisiones, bugs, lo que pasó cuándo. Bi-temporal, invalidación automática | **Primero, siempre** al inicio de cualquier tarea |
-| **2. Estructural** | code-review-graph | `code-review-graph` | AST, callers, callees, imports, tests, impact radius | Antes de leer archivos de código |
-| **3. Notas** | Obsidian vault local + mcpvault | `vault-<project>` | MOCs, ADRs, arquitectura, contexto de negocio | Para diseño, onboarding, decisiones de alto nivel |
+| Capa               | Sistema                         | MCP                 | Qué guarda                                                                 | Cuándo consultar                                  |
+| ------------------ | ------------------------------- | ------------------- | -------------------------------------------------------------------------- | ------------------------------------------------- |
+| **1. Episódica**   | Graphiti (Zep) sobre FalkorDB   | `graphiti-memory`   | Decisiones, bugs, lo que pasó cuándo. Bi-temporal, invalidación automática | **Primero, siempre** al inicio de cualquier tarea |
+| **2. Estructural** | code-review-graph               | `code-review-graph` | AST, callers, callees, imports, tests, impact radius                       | Antes de leer archivos de código                  |
+| **3. Notas**       | Obsidian vault local + mcpvault | `vault-<project>`   | MOCs, ADRs, arquitectura, contexto de negocio                              | Para diseño, onboarding, decisiones de alto nivel |
 
 El código fuente (`Read` directo) es el último recurso, no el primero.
 
@@ -36,6 +36,7 @@ Resultado: al activar el skill en un proyecto nuevo, se crea su grafo + su vault
 ### 1. Detectar estado
 
 Ejecutá:
+
 ```bash
 bash ~/.claude/skills/persistent-memory-graph/scripts/check-status.sh
 ```
@@ -49,6 +50,7 @@ bash ~/.claude/skills/persistent-memory-graph/scripts/init-project.sh
 ```
 
 Este script:
+
 - Verifica que FalkorDB esté corriendo (lo arranca si no, vía Docker)
 - Crea `<project>/.vault/` con MOCs base (`00-INDEX.md`, carpetas `decisions/`, `context/`, `sessions/`)
 - Hace merge en `.mcp.json` agregando `graphiti-memory` con `--group-id <basename>` y `vault-<project>` con la ruta del vault
@@ -104,15 +106,15 @@ PROTOCOLO_LECTURA(tarea):
 
 ### Triggers concretos por tipo de tarea
 
-| Pedido del usuario | Orden del protocolo |
-|--------------------|---------------------|
-| "Implementa feature X" | Capa 1 (¿hay precedente?) → Capa 2 (`semantic_search` de módulos relevantes) → leer ≤3 archivos → Edit |
-| "Revisa este PR / diff" | Capa 2 (`detect_changes` + `get_review_context`) → NO leer código directamente |
-| "¿Por qué existe Y?" | Capa 3 notas (`00-INDEX.md`, ADRs) → Capa 1 (episodios) |
-| "¿Qué rompe si cambio Z?" | Capa 2 (`get_impact_radius` + `get_affected_flows`) → leer SOLO impacto alto |
-| "Bug reportado" | Capa 1 (`search_memory_facts` "bug similar") → Capa 2 (`callers_of` función sospechosa) → Read |
+| Pedido del usuario          | Orden del protocolo                                                                                         |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| "Implementa feature X"      | Capa 1 (¿hay precedente?) → Capa 2 (`semantic_search` de módulos relevantes) → leer ≤3 archivos → Edit      |
+| "Revisa este PR / diff"     | Capa 2 (`detect_changes` + `get_review_context`) → NO leer código directamente                              |
+| "¿Por qué existe Y?"        | Capa 3 notas (`00-INDEX.md`, ADRs) → Capa 1 (episodios)                                                     |
+| "¿Qué rompe si cambio Z?"   | Capa 2 (`get_impact_radius` + `get_affected_flows`) → leer SOLO impacto alto                                |
+| "Bug reportado"             | Capa 1 (`search_memory_facts` "bug similar") → Capa 2 (`callers_of` función sospechosa) → Read              |
 | "Onboarding / sesión nueva" | Capa 3 (`00-INDEX.md` del vault) → Capa 1 (episodios recientes) → NO leer código hasta tener tarea concreta |
-| "Refactor X a Y" | Capa 1 (¿se intentó antes?) → Capa 2 (`get_impact_radius`) → Capa 3 (registrar como ADR antes de empezar) |
+| "Refactor X a Y"            | Capa 1 (¿se intentó antes?) → Capa 2 (`get_impact_radius`) → Capa 3 (registrar como ADR antes de empezar)   |
 
 ## Anti-patrones
 
@@ -138,6 +140,7 @@ Si el setup completo (Docker + FalkorDB + OpenAI API key) es overkill para un pr
 ## Métrica de éxito
 
 Después de adoptar el protocolo, mediar:
+
 - **`Read` calls antes del primer `Edit`**: objetivo ≤3 para tareas de mantenimiento
 - **Tokens consumidos por tarea**: con Capa 1+2 funcionando, esperar 60-80% reducción vs leer código directo
 - **Señal subjetiva**: el agente no pregunta "¿en qué framework están?" ni repite errores resueltos en sesiones previas

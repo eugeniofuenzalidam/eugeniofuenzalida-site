@@ -9,7 +9,7 @@ const firebaseConfig = {
   storageBucket: "eugeniofuenzalidaps.firebasestorage.app",
   messagingSenderId: "153097732814",
   appId: "1:153097732814:web:757f723336ae187492069f",
-  measurementId: "G-N2Y9RSPVZ8"
+  measurementId: "G-N2Y9RSPVZ8",
 };
 
 const app = initializeApp(firebaseConfig);

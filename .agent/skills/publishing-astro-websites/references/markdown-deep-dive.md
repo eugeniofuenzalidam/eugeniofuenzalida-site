@@ -28,10 +28,10 @@ export const collections = {
       pubDate: z.coerce.date(),
       updatedDate: z.coerce.date().optional(),
       heroImage: z.string().optional(),
-      author: reference('authors'),  // Reference another collection
+      author: reference("authors"), // Reference another collection
       tags: z.array(z.string()).default([]),
-      draft: z.boolean().default(false)
-    })
+      draft: z.boolean().default(false),
+    }),
   }),
 
   // Authors collection
@@ -39,8 +39,8 @@ export const collections = {
     schema: z.object({
       name: z.string(),
       avatar: z.string(),
-      bio: z.string()
-    })
+      bio: z.string(),
+    }),
   }),
 
   // Documentation with ordering
@@ -48,12 +48,14 @@ export const collections = {
     schema: z.object({
       title: z.string(),
       description: z.string().optional(),
-      sidebar: z.object({
-        order: z.number(),
-        label: z.string().optional()
-      }).optional()
-    })
-  })
+      sidebar: z
+        .object({
+          order: z.number(),
+          label: z.string().optional(),
+        })
+        .optional(),
+    }),
+  }),
 };
 ```
 
@@ -90,40 +92,44 @@ export default defineConfig({
   markdown: {
     shikiConfig: {
       // Available themes: https://shiki.style/themes
-      theme: 'github-dark',
+      theme: "github-dark",
       // Or use dual themes for light/dark mode
       themes: {
-        light: 'github-light',
-        dark: 'github-dark'
+        light: "github-light",
+        dark: "github-dark",
       },
       // Enable word wrap
       wrap: true,
       // Add custom languages
-      langs: []
-    }
-  }
+      langs: [],
+    },
+  },
 });
 ```
 
 ### Line Highlighting Syntax
 
-```markdown
+````markdown
 <!-- Highlight lines 2-4 -->
+
 ```js {2-4}
 const a = 1;
 const b = 2;
 const c = 3;
 const d = 4;
 ```
+````
 
 <!-- Highlight with markers -->
+
 ```js {2} ins={3} del={4}
 const original = 1;
-const modified = 2;  // highlighted
-const added = 3;     // green (inserted)
-const removed = 4;   // red (deleted)
+const modified = 2; // highlighted
+const added = 3; // green (inserted)
+const removed = 4; // red (deleted)
 ```
-```
+
+````
 
 ### Code Block Titles
 
@@ -132,8 +138,9 @@ const removed = 4;   // red (deleted)
 export function helper() {
   return 'Hello';
 }
-```
-```
+````
+
+````
 
 ## MDX Integration
 
@@ -141,15 +148,15 @@ Install and configure:
 
 ```bash
 npx astro add mdx
-```
+````
 
 ```javascript
 // astro.config.mjs
-import { defineConfig } from 'astro/config';
-import mdx from '@astrojs/mdx';
+import { defineConfig } from "astro/config";
+import mdx from "@astrojs/mdx";
 
 export default defineConfig({
-  integrations: [mdx()]
+  integrations: [mdx()],
 });
 ```
 
@@ -159,14 +166,13 @@ export default defineConfig({
 ---
 title: My Article
 ---
-import Callout from '../components/Callout.astro';
-import CodeDemo from '../components/CodeDemo.jsx';
+
+import Callout from "../components/Callout.astro";
+import CodeDemo from "../components/CodeDemo.jsx";
 
 # {frontmatter.title}
 
-<Callout type="warning">
-  This is an important warning!
-</Callout>
+<Callout type="warning">This is an important warning!</Callout>
 
 Here's an interactive demo:
 
@@ -202,25 +208,22 @@ const { Content } = await post.render();
 
 ```javascript
 // astro.config.mjs
-import { defineConfig } from 'astro/config';
-import remarkToc from 'remark-toc';
-import remarkMath from 'remark-math';
-import rehypeKatex from 'rehype-katex';
-import rehypeSlug from 'rehype-slug';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import { defineConfig } from "astro/config";
+import remarkToc from "remark-toc";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
 export default defineConfig({
   markdown: {
-    remarkPlugins: [
-      remarkToc,
-      remarkMath
-    ],
+    remarkPlugins: [remarkToc, remarkMath],
     rehypePlugins: [
       rehypeSlug,
-      [rehypeAutolinkHeadings, { behavior: 'wrap' }],
-      rehypeKatex
-    ]
-  }
+      [rehypeAutolinkHeadings, { behavior: "wrap" }],
+      rehypeKatex,
+    ],
+  },
 });
 ```
 
@@ -228,8 +231,8 @@ export default defineConfig({
 
 ```javascript
 // plugins/remark-reading-time.mjs
-import getReadingTime from 'reading-time';
-import { toString } from 'mdast-util-to-string';
+import getReadingTime from "reading-time";
+import { toString } from "mdast-util-to-string";
 
 export function remarkReadingTime() {
   return function (tree, { data }) {
@@ -242,12 +245,12 @@ export function remarkReadingTime() {
 
 ```javascript
 // astro.config.mjs
-import { remarkReadingTime } from './plugins/remark-reading-time.mjs';
+import { remarkReadingTime } from "./plugins/remark-reading-time.mjs";
 
 export default defineConfig({
   markdown: {
-    remarkPlugins: [remarkReadingTime]
-  }
+    remarkPlugins: [remarkReadingTime],
+  },
 });
 ```
 
@@ -290,9 +293,11 @@ const { Content, headings } = await post.render();
 
 ```markdown
 <!-- Use relative paths for optimization -->
+
 ![Alt text](./hero.png)
 
 <!-- Or import in MDX -->
+
 import heroImage from './hero.png';
 
 <img src={heroImage.src} alt="Hero" />
@@ -304,9 +309,9 @@ import heroImage from './hero.png';
 // astro.config.mjs
 export default defineConfig({
   image: {
-    domains: ['images.unsplash.com'],
-    remotePatterns: [{ protocol: 'https' }]
-  }
+    domains: ["images.unsplash.com"],
+    remotePatterns: [{ protocol: "https" }],
+  },
 });
 ```
 
@@ -352,19 +357,23 @@ console.log(post.data.customField); // "Special Value"
 ## Troubleshooting Markdown Issues
 
 **Frontmatter validation errors:**
+
 ```bash
 astro check  # Shows detailed schema errors
 ```
 
 **Code block not highlighting:**
+
 - Ensure language tag is specified: \`\`\`javascript
 - Check theme is properly configured
 
 **MDX components not rendering:**
+
 - Verify component is imported at top of file
 - Check component path is correct
 - Ensure MDX integration is installed
 
 **Slow builds with many Markdown files:**
+
 - Consider incremental builds
 - Use `content.config.ts` type generation caching

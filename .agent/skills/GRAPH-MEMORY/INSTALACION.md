@@ -1,7 +1,7 @@
 # INSTALACIÓN — Skills de Memoria Local para Claude Code
 
 > **Para el usuario humano**: abrí Claude Code en cualquier carpeta y decile:
-> *"Leé el archivo `INSTALACION.md` de esta carpeta y ejecutá la instalación completa."*
+> _"Leé el archivo `INSTALACION.md` de esta carpeta y ejecutá la instalación completa."_
 > Claude se encarga del resto.
 >
 > **Para Claude Code**: este archivo es un instructivo ejecutable. Seguí los pasos en orden. No salteés verificaciones. Reportá cada paso al usuario en una línea.
@@ -49,11 +49,11 @@ command -v claude && command -v npx && command -v jq
 
 Si alguno falta, instalarlo:
 
-| Falta | Linux (Debian/Ubuntu) | macOS (Homebrew) | Windows |
-|-------|------------------------|-------------------|---------|
-| `claude` | https://docs.claude.com/claude-code | igual | usar WSL2 |
-| `npx`    | `sudo apt install nodejs npm` | `brew install node` | dentro de WSL2 |
-| `jq`     | `sudo apt install jq` | `brew install jq` | dentro de WSL2 |
+| Falta    | Linux (Debian/Ubuntu)               | macOS (Homebrew)    | Windows        |
+| -------- | ----------------------------------- | ------------------- | -------------- |
+| `claude` | https://docs.claude.com/claude-code | igual               | usar WSL2      |
+| `npx`    | `sudo apt install nodejs npm`       | `brew install node` | dentro de WSL2 |
+| `jq`     | `sudo apt install jq`               | `brew install jq`   | dentro de WSL2 |
 
 > **Windows**: el sistema usa scripts bash. Se requiere WSL2 (Ubuntu adentro). En Windows nativo no funciona.
 
@@ -74,6 +74,7 @@ echo "Origen: $SRC"
 ```
 
 Si Claude no puede inferirla automáticamente, preguntale al usuario:
+
 > "¿Dónde está la carpeta `skills-memoria-local`? Pegá la ruta absoluta."
 
 Verificá que adentro estén las 4 subcarpetas esperadas:
@@ -113,9 +114,11 @@ done
 ```
 
 Si hay warnings, preguntale al usuario:
+
 > "Ya existe `~/.claude/skills/<nombre>`. ¿Lo sobrescribo? (sí/no/backup)"
 
 Opciones:
+
 - **sí** → `rm -rf` y copiar encima.
 - **backup** → renombrar a `<nombre>.bak-YYYYMMDD` antes de copiar.
 - **no** → saltar ese skill (NO recomendado — los 4 deben quedar consistentes).
@@ -190,13 +193,13 @@ Próximos pasos:
 
 Esta es la pregunta importante: **los skills son globales, pero la memoria es por-proyecto**.
 
-| Capa | Dónde vive | Alcance |
-|------|------------|---------|
-| Skills (`/read`, `/write`, `/write-init`) | `~/.claude/skills/` | **Global** — disponibles en TODOS los proyectos |
-| Scripts auxiliares | `~/.claude/skills/persistent-memory-graph/scripts/` | **Global** |
-| Vault de memoria | `<proyecto>/.vault/` | **Aislado por proyecto** |
-| MCP `vault-<proyecto>` | `<proyecto>/.mcp.json` | **Aislado por proyecto** |
-| `.gitignore` con `.vault/` | `<proyecto>/.gitignore` | **Aislado por proyecto** |
+| Capa                                      | Dónde vive                                          | Alcance                                         |
+| ----------------------------------------- | --------------------------------------------------- | ----------------------------------------------- |
+| Skills (`/read`, `/write`, `/write-init`) | `~/.claude/skills/`                                 | **Global** — disponibles en TODOS los proyectos |
+| Scripts auxiliares                        | `~/.claude/skills/persistent-memory-graph/scripts/` | **Global**                                      |
+| Vault de memoria                          | `<proyecto>/.vault/`                                | **Aislado por proyecto**                        |
+| MCP `vault-<proyecto>`                    | `<proyecto>/.mcp.json`                              | **Aislado por proyecto**                        |
+| `.gitignore` con `.vault/`                | `<proyecto>/.gitignore`                             | **Aislado por proyecto**                        |
 
 Lo que esto significa en la práctica:
 
@@ -217,6 +220,7 @@ Bootstrap de la memoria en un proyecto nuevo. Crea `.vault/`, mergea `.mcp.json`
 ### `/read` — al empezar una tarea
 
 Antes de leer código directo, Claude consulta:
+
 1. El vault (`.vault/episodes/`, `.vault/decisions/`, `.vault/context/`).
 2. El grafo estructural si hay `code-review-graph` MCP activo.
 3. Solo entonces lee archivos (idealmente ≤5).
@@ -226,6 +230,7 @@ Reduce 60-80% el consumo de tokens vs leer código directo.
 ### `/write` — al terminar una tarea
 
 Persiste lo aprendido:
+
 - Episodio en `.vault/episodes/YYYY-MM-DD-HHmm-<slug>.md` — siempre.
 - ADR en `.vault/decisions/ADR-XXX-<slug>.md` — solo si fue decisión de arquitectura.
 - Actualiza `.vault/00-INDEX.md` con la nueva entrada (obligatorio — sin esto la próxima sesión no encuentra el episodio).
@@ -234,15 +239,15 @@ Persiste lo aprendido:
 
 ## Troubleshooting
 
-| Síntoma | Causa probable | Solución |
-|---------|----------------|----------|
-| `/read`, `/write` no aparecen como slash-commands | Claude Code no recargó skills | Cerrar y reabrir Claude Code completo |
-| `/write-init` corre pero el vault no funciona después | `.mcp.json` no recargado | Reiniciar Claude Code después de `/write-init` |
-| `npx -y @bitbonsai/mcpvault` falla | Sin internet o npm registry caído | `npm config get registry` debe responder; reintentar con conexión |
-| `jq: command not found` (macOS) | jq no instalado | `brew install jq` |
-| Scripts `.sh` no ejecutan ("permission denied") | Falta `chmod +x` | Repetir el Paso 3 |
-| Windows nativo no funciona | Los scripts son bash | Usar WSL2 (Ubuntu adentro) |
-| `vault-<proyecto>` no aparece en el MCP de Claude | `.mcp.json` mal formado o no recargado | `jq . <proyecto>/.mcp.json` para validar, luego reiniciar Claude |
+| Síntoma                                               | Causa probable                         | Solución                                                          |
+| ----------------------------------------------------- | -------------------------------------- | ----------------------------------------------------------------- |
+| `/read`, `/write` no aparecen como slash-commands     | Claude Code no recargó skills          | Cerrar y reabrir Claude Code completo                             |
+| `/write-init` corre pero el vault no funciona después | `.mcp.json` no recargado               | Reiniciar Claude Code después de `/write-init`                    |
+| `npx -y @bitbonsai/mcpvault` falla                    | Sin internet o npm registry caído      | `npm config get registry` debe responder; reintentar con conexión |
+| `jq: command not found` (macOS)                       | jq no instalado                        | `brew install jq`                                                 |
+| Scripts `.sh` no ejecutan ("permission denied")       | Falta `chmod +x`                       | Repetir el Paso 3                                                 |
+| Windows nativo no funciona                            | Los scripts son bash                   | Usar WSL2 (Ubuntu adentro)                                        |
+| `vault-<proyecto>` no aparece en el MCP de Claude     | `.mcp.json` mal formado o no recargado | `jq . <proyecto>/.mcp.json` para validar, luego reiniciar Claude  |
 
 ---
 

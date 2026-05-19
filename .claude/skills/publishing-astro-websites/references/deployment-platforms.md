@@ -4,14 +4,14 @@ Comprehensive deployment guides for major hosting platforms.
 
 ## Platform Comparison
 
-| Platform | Auto CI/CD | Custom Domain | Edge CDN | Free Tier |
-|----------|------------|---------------|----------|-----------|
-| Netlify | Yes | Yes | Yes | 100GB/mo |
-| Vercel | Yes | Yes | Yes | 100GB/mo |
-| Cloudflare Pages | Yes | Yes | Yes | Unlimited |
-| GitHub Pages | Manual | Yes | Via CDN | Unlimited |
-| Firebase Hosting | Manual | Yes | Yes | 10GB/mo |
-| AWS S3+CloudFront | Manual | Yes | Yes | Pay-as-go |
+| Platform          | Auto CI/CD | Custom Domain | Edge CDN | Free Tier |
+| ----------------- | ---------- | ------------- | -------- | --------- |
+| Netlify           | Yes        | Yes           | Yes      | 100GB/mo  |
+| Vercel            | Yes        | Yes           | Yes      | 100GB/mo  |
+| Cloudflare Pages  | Yes        | Yes           | Yes      | Unlimited |
+| GitHub Pages      | Manual     | Yes           | Via CDN  | Unlimited |
+| Firebase Hosting  | Manual     | Yes           | Yes      | 10GB/mo   |
+| AWS S3+CloudFront | Manual     | Yes           | Yes      | Pay-as-go |
 
 ## Netlify
 
@@ -179,8 +179,8 @@ jobs:
 ```javascript
 // astro.config.mjs
 export default defineConfig({
-  site: 'https://username.github.io',
-  base: '/repository-name'
+  site: "https://username.github.io",
+  base: "/repository-name",
 });
 ```
 
@@ -203,11 +203,7 @@ firebase init hosting
 {
   "hosting": {
     "public": "dist",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [],
     "headers": [
       {
@@ -342,6 +338,7 @@ aws s3 sync dist/ s3://my-astro-site --delete
 ### CloudFront Distribution
 
 Key settings:
+
 - Origin: S3 bucket website endpoint
 - Default root object: `index.html`
 - Custom error response: 404 → /404.html
@@ -401,13 +398,13 @@ gcloud compute url-maps invalidate-cdn-cache my-lb \
 
 ### When to Use GCS + CDN vs Firebase
 
-| Scenario | Recommendation |
-|----------|----------------|
-| Simple static site | Firebase Hosting |
-| Need fine-grained cache control | GCS + CDN |
-| Already using GCP extensively | GCS + CDN |
-| Want simplest setup | Firebase Hosting |
-| Need custom CDN configuration | GCS + CDN |
+| Scenario                        | Recommendation   |
+| ------------------------------- | ---------------- |
+| Simple static site              | Firebase Hosting |
+| Need fine-grained cache control | GCS + CDN        |
+| Already using GCP extensively   | GCS + CDN        |
+| Want simplest setup             | Firebase Hosting |
+| Need custom CDN configuration   | GCS + CDN        |
 
 ## Common Issues and Solutions
 
@@ -416,7 +413,7 @@ gcloud compute url-maps invalidate-cdn-cache my-lb \
 ```javascript
 // astro.config.mjs
 export default defineConfig({
-  trailingSlash: 'always'  // or 'never' or 'ignore'
+  trailingSlash: "always", // or 'never' or 'ignore'
 });
 ```
 
@@ -425,8 +422,8 @@ export default defineConfig({
 ```javascript
 // astro.config.mjs
 export default defineConfig({
-  site: 'https://example.com',
-  base: '/my-app'
+  site: "https://example.com",
+  base: "/my-app",
 });
 ```
 
@@ -446,6 +443,7 @@ Most platforms need explicit 404 configuration:
 ### Build Failures
 
 Common causes:
+
 - Node version mismatch (use v18+)
 - Missing environment variables
 - Case-sensitive file systems (Linux vs macOS)
@@ -459,8 +457,8 @@ For optimal performance, ensure assets have cache headers:
 // astro.config.mjs
 export default defineConfig({
   build: {
-    assets: '_assets'  // Prefixed directory for fingerprinted assets
-  }
+    assets: "_assets", // Prefixed directory for fingerprinted assets
+  },
 });
 ```
 
@@ -470,10 +468,10 @@ export default defineConfig({
 
 ```javascript
 // astro.config.mjs
-import compress from 'astro-compress';
+import compress from "astro-compress";
 
 export default defineConfig({
-  integrations: [compress()]
+  integrations: [compress()],
 });
 ```
 
@@ -484,9 +482,9 @@ export default defineConfig({
 export default defineConfig({
   image: {
     service: {
-      entrypoint: 'astro/assets/services/sharp'
-    }
-  }
+      entrypoint: "astro/assets/services/sharp",
+    },
+  },
 });
 ```
 
@@ -497,7 +495,7 @@ export default defineConfig({
 export default defineConfig({
   prefetch: {
     prefetchAll: true,
-    defaultStrategy: 'viewport'
-  }
+    defaultStrategy: "viewport",
+  },
 });
 ```

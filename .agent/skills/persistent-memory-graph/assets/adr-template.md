@@ -9,6 +9,7 @@ tags: [adr]
 ## Contexto
 
 ¿Qué problema o decisión enfrentamos? ¿Qué fuerzas operan?
+
 - Restricciones técnicas, de negocio, de tiempo
 - Lo que ya existe y por qué no alcanza
 
@@ -26,12 +27,15 @@ Detalles concretos: nombres de paquetes, endpoints, esquemas, límites.
 ## Consecuencias
 
 ### Positivas
+
 - ...
 
 ### Negativas / costos
+
 - ...
 
 ### Neutras
+
 - ...
 
 ## Notas de implementación

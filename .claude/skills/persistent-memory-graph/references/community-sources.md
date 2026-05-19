@@ -14,29 +14,29 @@ Material consultado para diseñar este skill. Útil para profundizar en partes e
 
 ## Documentación oficial
 
-- Anthropic — *Effective context engineering for AI agents*: https://www.anthropic.com/engineering/effective-context-engineering-for-aiagents
-- Zep — *Knowledge Graph MCP Server*: https://help.getzep.com/graphiti/getting-started/mcp-server
-- Neo4j blog — *Graphiti: Knowledge Graph Memory for an Agentic World*: https://neo4j.com/blog/developer/graphiti-knowledge-graph-memory/
-- Anthropic Cookbook — *Memory & context management*: https://platform.claude.com/cookbook/tool-use-memory-cookbook
+- Anthropic — _Effective context engineering for AI agents_: https://www.anthropic.com/engineering/effective-context-engineering-for-aiagents
+- Zep — _Knowledge Graph MCP Server_: https://help.getzep.com/graphiti/getting-started/mcp-server
+- Neo4j blog — _Graphiti: Knowledge Graph Memory for an Agentic World_: https://neo4j.com/blog/developer/graphiti-knowledge-graph-memory/
+- Anthropic Cookbook — _Memory & context management_: https://platform.claude.com/cookbook/tool-use-memory-cookbook
 
 ## Papers
 
-- *Zep: A Temporal Knowledge Graph Architecture for Agent Memory* — arXiv:2501.13956
-- *MAGMA: A Multi-Graph based Agentic Memory Architecture* — arXiv:2601.03236
-- *Reducing Token Usage of Software Engineering Agents* — TU Wien 2025
+- _Zep: A Temporal Knowledge Graph Architecture for Agent Memory_ — arXiv:2501.13956
+- _MAGMA: A Multi-Graph based Agentic Memory Architecture_ — arXiv:2601.03236
+- _Reducing Token Usage of Software Engineering Agents_ — TU Wien 2025
 
 ## Análisis comparativos
 
-- Cognee — *AI Memory Benchmarking: Cognee, LightRAG, Graphiti, Mem0*: https://www.cognee.ai/blog/deep-dives/ai-memory-evals-0825
-- *Mem0 vs Zep vs LangMem vs MemoClaw: AI Agent Memory Comparison 2026*: https://dev.to/anajuliabit/mem0-vs-zep-vs-langmem-vs-memoclaw-ai-agent-memory-comparison-2026-1l1k
-- Mem0 — *Graph-Based Memory Solutions for AI Context: Top 5 Compared*: https://mem0.ai/blog/graph-memory-solutions-ai-agents
-- *Obsidian MCP Servers — Eight Servers, Three Architectures*: https://chatforest.com/reviews/obsidian-mcp-servers/
+- Cognee — _AI Memory Benchmarking: Cognee, LightRAG, Graphiti, Mem0_: https://www.cognee.ai/blog/deep-dives/ai-memory-evals-0825
+- _Mem0 vs Zep vs LangMem vs MemoClaw: AI Agent Memory Comparison 2026_: https://dev.to/anajuliabit/mem0-vs-zep-vs-langmem-vs-memoclaw-ai-agent-memory-comparison-2026-1l1k
+- Mem0 — _Graph-Based Memory Solutions for AI Context: Top 5 Compared_: https://mem0.ai/blog/graph-memory-solutions-ai-agents
+- _Obsidian MCP Servers — Eight Servers, Three Architectures_: https://chatforest.com/reviews/obsidian-mcp-servers/
 
 ## Tutoriales / charlas
 
 - Cole Medin — Graphiti + MCP setup tutorials (YouTube)
-- Martin Fowler — *Context Engineering for Coding Agents*: https://martinfowler.com/articles/exploring-gen-ai/context-engineering-coding-agents.html
-- LangChain — *Context Engineering for Agents*: https://blog.langchain.com/context-engineering-for-agents/
+- Martin Fowler — _Context Engineering for Coding Agents_: https://martinfowler.com/articles/exploring-gen-ai/context-engineering-coding-agents.html
+- LangChain — _Context Engineering for Agents_: https://blog.langchain.com/context-engineering-for-agents/
 
 ## Skills relacionados (Claude Code)
 

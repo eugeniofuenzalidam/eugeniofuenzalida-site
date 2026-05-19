@@ -38,6 +38,7 @@ bash ~/.claude/skills/persistent-memory-graph/scripts/check-status.sh
 Solo si el proyecto tiene historial rico y `.vault/episodes/` está vacío (o tiene < 3 episodios).
 
 **4a. Leer fuentes disponibles** (en paralelo, solo las que existan):
+
 - `git log --oneline -50` — historia de commits
 - `CLAUDE.md` — arquitectura, decisiones, gotchas
 - `docs/` o `MEJORAS.md`, `AUDIT-*.md` si existen
@@ -59,21 +60,25 @@ files: [src/lib/firebase/auth.ts, functions/src/middleware/auth.ts]
 # Sistema de auth con Google Sign-In + session cookie httpOnly
 
 ## Tarea
-Historia inicial del sistema: Google Sign-In → ID token → POST /api/auth/session → cookie __session (httpOnly). Custom claims { role, clientId }.
+
+Historia inicial del sistema: Google Sign-In → ID token → POST /api/auth/session → cookie \_\_session (httpOnly). Custom claims { role, clientId }.
 
 ## Contexto consultado
+
 - Read: CLAUDE.md sección Autenticación
 
 ## Decisiones tomadas
-Cookie llamada __session (obligatorio para Firebase Hosting forwarding). En producción no hay middleware Next.js — la seguridad está en Cloud Functions Express middleware.
+
+Cookie llamada \_\_session (obligatorio para Firebase Hosting forwarding). En producción no hay middleware Next.js — la seguridad está en Cloud Functions Express middleware.
 
 ## Bugs / gotchas encontrados
+
 onAuthStateChanged dispara ANTES de que la cookie exista durante sign-in → race condition. Fix: isInitialCheck flag en auth-context.tsx. window.location.reload() requerido post-login (no router.push).
 ```
 
 **4c. Crear ADRs iniciales** para decisiones de arquitectura visibles en CLAUDE.md:
 
-Candidatos típicos: static export + Cloud Functions, dual API code (dev vs prod), Firebase __session cookie, MercadoPago PreApproval sin planes, client discriminated union.
+Candidatos típicos: static export + Cloud Functions, dual API code (dev vs prod), Firebase \_\_session cookie, MercadoPago PreApproval sin planes, client discriminated union.
 
 **4d. Actualizar `00-INDEX.md`** en el vault con lista de episodios y ADRs creados.
 
@@ -82,6 +87,7 @@ Todos los archivos se escriben via `vault-<project>.write_note(path, content)`.
 ### Paso 5 — Reportar al usuario
 
 Informar:
+
 - Qué se creó (vault path, episodios, ADRs)
 - Si ya estaba inicializado, qué se agregó
 - **Recordar reiniciar Claude Code** para que cargue el `.mcp.json` actualizado

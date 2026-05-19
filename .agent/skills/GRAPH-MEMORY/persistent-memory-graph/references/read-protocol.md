@@ -5,7 +5,7 @@ Esta es la referencia ampliada del flujo descrito en `SKILL.md`. Léela cuando n
 ## El principio
 
 > "Re-leer archivos en cada sesión es el desperdicio de tokens más caro que existe en agentes LLM. Memoria episódica + grafo estructural + lectura selectiva reduce 60-80% el consumo de contexto sin perder calidad."
-> — Adaptado de Anthropic Engineering, *Effective context engineering for AI agents* (2025)
+> — Adaptado de Anthropic Engineering, _Effective context engineering for AI agents_ (2025)
 
 El código fuente es la verdad última, pero releerlo entero es como abrir un diccionario para recordar una palabra que ya buscaste ayer. La memoria episódica recuerda qué buscaste; el grafo estructural te dice exactamente qué página abrir.
 
@@ -102,11 +102,11 @@ def read_protocol(task: str) -> Plan:
 
 ## Métricas para saber si funciona
 
-| Métrica | Antes (sin skill) | Después (con skill bien usado) |
-|---|---|---|
-| `Read` calls antes del primer `Edit` | 5-15 | ≤3 |
-| Tokens consumidos por tarea de mantenimiento | 30-80K | 8-25K |
-| Tareas que requieren preguntar contexto al usuario | ~40% | <10% |
-| Tiempo entre prompt → primer `Edit` útil | varía | reducido proporcionalmente |
+| Métrica                                            | Antes (sin skill) | Después (con skill bien usado) |
+| -------------------------------------------------- | ----------------- | ------------------------------ |
+| `Read` calls antes del primer `Edit`               | 5-15              | ≤3                             |
+| Tokens consumidos por tarea de mantenimiento       | 30-80K            | 8-25K                          |
+| Tareas que requieren preguntar contexto al usuario | ~40%              | <10%                           |
+| Tiempo entre prompt → primer `Edit` útil           | varía             | reducido proporcionalmente     |
 
 Si tras 5-10 tareas no ves estos números mejorar, revisar `troubleshooting.md`. La causa más común: el agente no está ejecutando el paso 6 (persistir), así que la memoria nunca se llena.

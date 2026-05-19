@@ -3,16 +3,18 @@
 ## PaymentRefund SDK
 
 ```ts
-import { MercadoPagoConfig, PaymentRefund } from 'mercadopago';
+import { MercadoPagoConfig, PaymentRefund } from "mercadopago";
 
 async function handleMercadoPagoRefund(paymentId: string, amount?: number) {
-  const mpConfig = new MercadoPagoConfig({ accessToken: process.env.MERCADOPAGO_ACCESS_TOKEN });
+  const mpConfig = new MercadoPagoConfig({
+    accessToken: process.env.MERCADOPAGO_ACCESS_TOKEN,
+  });
   const refundClient = new PaymentRefund(mpConfig);
   const refund = await refundClient.create({
     payment_id: paymentId,
     body: amount ? { amount } : {}, // sin body = refund total
   });
-  if (!refund.id) throw new Error('MP_EMPTY_RESPONSE');
+  if (!refund.id) throw new Error("MP_EMPTY_RESPONSE");
   return refund;
 }
 ```
@@ -22,28 +24,35 @@ async function handleMercadoPagoRefund(paymentId: string, amount?: number) {
 ## Auto-refund triggers
 
 Apex dispara `initiateAutoRefund()` automáticamente en webhook cuando:
+
 - Booking no existe (`Booking not found`).
 - Booking expirado al momento del cobro (`Booking expired before payment was processed`).
 - Monto cobrado distinto del esperado (`Amount mismatch`).
 - Falla la reserva atómica de fechas (`Dates no longer available`).
 
 ```ts
-async function initiateAutoRefund(db, paymentInfo, bookingRef, bookingId, reason) {
+async function initiateAutoRefund(
+  db,
+  paymentInfo,
+  bookingRef,
+  bookingId,
+  reason,
+) {
   const refund = await new PaymentRefund(createMercadoPagoClient()).create({
     payment_id: paymentInfo.id,
     body: {},
   });
-  await db.collection('refunds').doc(`mp_${refund.id}`).set({
+  await db.collection("refunds").doc(`mp_${refund.id}`).set({
     paymentId: paymentInfo.id,
     bookingId,
     amount: paymentInfo.transaction_amount,
     currency: paymentInfo.currency_id,
     reason,
-    provider: 'mercadopago',
-    status: 'created',
+    provider: "mercadopago",
+    status: "created",
     createdAt: admin.firestore.FieldValue.serverTimestamp(),
   });
-  await bookingRef.update({ status: 'refunded', refundReason: reason });
+  await bookingRef.update({ status: "refunded", refundReason: reason });
   // notificar admin (Resend) para investigación
 }
 ```

@@ -18,15 +18,15 @@ Estos dos stacks resolvieron los problemas reales de MP: race conditions del SDK
 
 ## Cómo decidir qué leer
 
-| Si el usuario… | Lee primero |
-|---|---|
-| pide implementar MP desde cero | `references/checkout-pro-flow.md` + `references/preference-creation.md` |
-| edita o depura webhook | `references/webhook-handler.md` + `references/signature-validation.md` |
-| reporta firma inválida / `Signature mismatch` | `references/signature-validation.md` |
-| reporta orden en `pending` post-pago en sandbox | `references/sandbox-and-credentials.md` |
-| pide refund / chargeback | `references/refunds-and-disputes.md` |
-| necesita conversión USD→CLP o multi-currency | `references/currency-conversion.md` |
-| pide rotar credenciales test ↔ prod | `references/sandbox-and-credentials.md` |
+| Si el usuario…                                  | Lee primero                                                             |
+| ----------------------------------------------- | ----------------------------------------------------------------------- |
+| pide implementar MP desde cero                  | `references/checkout-pro-flow.md` + `references/preference-creation.md` |
+| edita o depura webhook                          | `references/webhook-handler.md` + `references/signature-validation.md`  |
+| reporta firma inválida / `Signature mismatch`   | `references/signature-validation.md`                                    |
+| reporta orden en `pending` post-pago en sandbox | `references/sandbox-and-credentials.md`                                 |
+| pide refund / chargeback                        | `references/refunds-and-disputes.md`                                    |
+| necesita conversión USD→CLP o multi-currency    | `references/currency-conversion.md`                                     |
+| pide rotar credenciales test ↔ prod             | `references/sandbox-and-credentials.md`                                 |
 
 Mantén SKILL.md como mapa; el detalle vive en `references/`.
 
@@ -35,12 +35,13 @@ Mantén SKILL.md como mapa; el detalle vive en `references/`.
 ## Reglas de oro (no negociables)
 
 ### 1. Crea un `MercadoPagoConfig` NUEVO por cada llamada server-side
+
 El SDK Node muta `this.config.options`. Compartir un singleton entre `Preference`, `Payment`, `PaymentRefund` produce race conditions silenciosas (idempotencyKeys cruzados, headers contaminados). Apex lo documenta como **FIX 45**.
 
 ```ts
 export function createMercadoPagoClient() {
   const accessToken = process.env.MERCADOPAGO_ACCESS_TOKEN?.trim();
-  if (!accessToken) throw new Error('MERCADOPAGO_ACCESS_TOKEN not configured');
+  if (!accessToken) throw new Error("MERCADOPAGO_ACCESS_TOKEN not configured");
   return new MercadoPagoConfig({ accessToken, options: { timeout: 10000 } });
 }
 ```
@@ -48,60 +49,82 @@ export function createMercadoPagoClient() {
 Smart Choice lo cachea porque sólo tiene 2 funciones; al pasar de 2 a 3+ usos del SDK, **migrá a per-call**.
 
 ### 2. Usa `initPoint`, NUNCA `sandboxInitPoint`
+
 `sandboxInitPoint` está roto desde 2022 para Checkout Pro (issue público). Cuando el `MERCADOPAGO_ACCESS_TOKEN` corresponde a credenciales test, `initPoint` auto-rutea a sandbox. Dejá el campo `sandboxInitPoint` en la respuesta sólo para auditoría.
 
 ### 3. Verificá monto contra Firestore antes de confirmar
+
 NO confíes en montos del frontend ni en el body del webhook. Cargá el booking/orden de Firestore, calculá el `expectedAmount` y comparalo con `paymentInfo.transaction_amount` con tolerancia:
 
-| Caso | Tolerancia |
-|---|---|
-| Misma moneda | 1% |
-| USD↔CLP con tipo de cambio congelado en booking | 3% |
-| Cross-currency sin congelar | 5% |
-| Par desconocido | 10% (warning) |
+| Caso                                            | Tolerancia    |
+| ----------------------------------------------- | ------------- |
+| Misma moneda                                    | 1%            |
+| USD↔CLP con tipo de cambio congelado en booking | 3%            |
+| Cross-currency sin congelar                     | 5%            |
+| Par desconocido                                 | 10% (warning) |
 
 Si el monto NO coincide → `initiateAutoRefund()` y abortar.
 
 ### 4. Validá la firma HMAC con manifest exacto y `timingSafeEqual`
+
 Manifest correcto (omitir campos ausentes): `id:<data.id>;request-id:<x-request-id>;ts:<ts>;`. **`data.id` SOLO desde query params** (`req.query['data.id']`), nunca desde el body — MP firma usando el query. Cloud Run a veces sobrescribe `x-request-id` y rompe el HMAC: cuando esto pase, **NO** rechaces el webhook; loguea warning y delegá la verificación en `payment.get({ id })` contra la API de MP. Ver `references/signature-validation.md`.
 
 ### 5. Idempotencia atómica con Firestore transaction
+
 Reclamá `webhookEvents/mp_<type>_<id>` en una transaction:
 
 ```ts
-const claim = await db.runTransaction(async tx => {
+const claim = await db.runTransaction(async (tx) => {
   const doc = await tx.get(eventRef);
-  if (doc.exists && doc.data()?.processed === true) return 'already_processed';
-  if (doc.exists && doc.data()?.claimedAt && Date.now() - doc.data().claimedAt.toMillis() < 5*60*1000)
-    return 'claimed_by_other';
-  tx.set(eventRef, { provider:'mercadopago', type, dataId:id, claimedAt: admin.firestore.Timestamp.now(), processed:false });
-  return 'claimed';
+  if (doc.exists && doc.data()?.processed === true) return "already_processed";
+  if (
+    doc.exists &&
+    doc.data()?.claimedAt &&
+    Date.now() - doc.data().claimedAt.toMillis() < 5 * 60 * 1000
+  )
+    return "claimed_by_other";
+  tx.set(eventRef, {
+    provider: "mercadopago",
+    type,
+    dataId: id,
+    claimedAt: admin.firestore.Timestamp.now(),
+    processed: false,
+  });
+  return "claimed";
 });
-if (claim !== 'claimed') return res.status(200).json({ received:true, duplicate:true });
+if (claim !== "claimed")
+  return res.status(200).json({ received: true, duplicate: true });
 ```
 
 V1 (`?id=&topic=`) y V2 (`?data.id=&type=`) deben compartir el mismo doc-id (no incluyas `requestId` en la clave).
 
 ### 6. Terminal-state guard
+
 Antes de cualquier mutación, leé el booking/order y abortá si está en estado terminal: Apex `confirmed|cancelled|refunded`, Smart Choice `paid|shipped|delivered|cancelled`. Esto previene regresiones por reintentos del webhook.
 
 ### 7. Clasificación de errores → status code
+
 - **Transitorios** (network, Firestore ABORTED, ETIMEDOUT, EAI_AGAIN, DEADLINE_EXCEEDED): responder **500** para que MP reintente.
 - **Permanentes** (booking inexistente, validación fallida, formato inválido): responder **200** con `error` para que MP no reintente.
 
 ### 8. Rate limiting del webhook
+
 30 req/min por IP en memoria con cleanup cada 30 s para evitar memory leak. MP normalmente envía ≤5/min; superar eso es DoS o loop.
 
 ### 9. `expires + expiration_date_to` 30 min
+
 Toda preferencia debe expirar. Sin esto, links viejos pueden cobrar dobles.
 
 ### 10. `external_reference` = ID interno del booking/orden
+
 Es la única forma confiable de mapear el pago a tu base. NO uses `metadata` para esto (puede no llegar en algunos eventos).
 
 ### 11. Display en CLP: sólo `$`, sin sufijo "CLP"
+
 El usuario lo pidió explícito en sesiones previas. `formatPrice()` / `formatCLP()` devuelven `$1.234.567`, no `$1.234.567 CLP`.
 
 ### 12. Secrets en gestor — NUNCA en repos ni en docs
+
 - Producción: Firebase Secret Manager (`firebase functions:secrets:set MP_ACCESS_TOKEN`).
 - Local: `.env.local` (gitignored).
 - Pre-commit hook bloquea patrones `APP_USR-*`. Si lo trippeás, usá gestor de contraseñas y documentá `(ver gestor)`.
@@ -113,27 +136,29 @@ El usuario lo pidió explícito en sesiones previas. `formatPrice()` / `formatCL
 
 ```ts
 const preferenceBody = {
-  items: [{
-    id: bookingId,                    // o orderId
-    title: itemName.substring(0, 256),
-    quantity: 1,
-    unit_price: Math.round(amountCLP), // SIEMPRE entero CLP
-    currency_id: 'CLP',
-  }],
+  items: [
+    {
+      id: bookingId, // o orderId
+      title: itemName.substring(0, 256),
+      quantity: 1,
+      unit_price: Math.round(amountCLP), // SIEMPRE entero CLP
+      currency_id: "CLP",
+    },
+  ],
   payer: payerEmail ? { email: payerEmail } : undefined,
   back_urls: {
     success: `${baseUrl}/confirmation/${bookingId}?source=mercadopago&status=success`,
     failure: `${baseUrl}/booking?status=failure&bookingId=${bookingId}`,
     pending: `${baseUrl}/confirmation/${bookingId}?source=mercadopago&status=pending`,
   },
-  auto_return: 'approved' as const,
-  external_reference: bookingId,           // CRÍTICO
+  auto_return: "approved" as const,
+  external_reference: bookingId, // CRÍTICO
   notification_url: `${apiUrl}/api/webhooks/mercadopago`,
-  statement_descriptor: 'APEX EXPERIENCE', // ≤22 chars, aparece en estado de cuenta
+  statement_descriptor: "APEX EXPERIENCE", // ≤22 chars, aparece en estado de cuenta
   expires: true,
   expiration_date_from: new Date().toISOString(),
-  expiration_date_to: new Date(Date.now() + 30*60*1000).toISOString(),
-  binary_mode: false,                      // permite pendientes (transferencia, etc.)
+  expiration_date_to: new Date(Date.now() + 30 * 60 * 1000).toISOString(),
+  binary_mode: false, // permite pendientes (transferencia, etc.)
 };
 
 const result = await new Preference(createMercadoPagoClient()).create({
@@ -182,13 +207,13 @@ Antes de marcar completo verificá (mental o en TaskList):
 
 ## Variables de entorno mínimas
 
-| Variable | Apex | Smart Choice | Notas |
-|---|---|---|---|
-| `MERCADOPAGO_ACCESS_TOKEN` | ✓ | `MP_ACCESS_TOKEN` | `APP_USR-...` (test o prod) |
-| `MERCADOPAGO_WEBHOOK_SECRET` | ✓ | `MP_WEBHOOK_SECRET` | HMAC signing — sólo prod |
-| `NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY` | ✓ | — | frontend, detectar `TEST-` mode |
-| `NEXT_PUBLIC_SITE_URL` / `APP_URL` | ✓ | ✓ | base para `back_urls` |
-| `FUNCTIONS_URL` | ✓ | hardcoded | base para `notification_url` |
+| Variable                             | Apex | Smart Choice        | Notas                           |
+| ------------------------------------ | ---- | ------------------- | ------------------------------- |
+| `MERCADOPAGO_ACCESS_TOKEN`           | ✓    | `MP_ACCESS_TOKEN`   | `APP_USR-...` (test o prod)     |
+| `MERCADOPAGO_WEBHOOK_SECRET`         | ✓    | `MP_WEBHOOK_SECRET` | HMAC signing — sólo prod        |
+| `NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY` | ✓    | —                   | frontend, detectar `TEST-` mode |
+| `NEXT_PUBLIC_SITE_URL` / `APP_URL`   | ✓    | ✓                   | base para `back_urls`           |
+| `FUNCTIONS_URL`                      | ✓    | hardcoded           | base para `notification_url`    |
 
 ---
 
