@@ -14,15 +14,16 @@ const { title, price, bookingService } = Astro.props;
     data-accordion-trigger
   >
     <div class="flex-1 flex flex-wrap items-center justify-between gap-4 mr-4 min-w-0">
-      <span class="text-base font-medium text-neutral-900 group-hover/accordion:text-black transition-colors duration-200 flex-1 min-w-[200px]">{title}</span>
+      <span class="text-base font-medium text-neutral-900 group-hover/accordion:text-black transition-colors duration-200 flex-1 min-w-[200px] pr-8 lg:pr-16">{title}</span>
       {bookingService ? (
-        <button
-          type="button"
+        <div
+          role="button"
+          tabindex="0"
           data-booking-service={bookingService}
           class="booking-btn px-4 py-2 bg-black text-white text-xs font-semibold rounded-lg hover:bg-neutral-800 transition-all cursor-pointer whitespace-nowrap shrink-0"
         >
           Agendar {price ? `— $${price}` : ''}
-        </button>
+        </div>
       ) : price ? (
         <span class="text-sm font-medium text-neutral-400 whitespace-nowrap shrink-0">${price}</span>
       ) : null}
