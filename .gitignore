@@ -29,3 +29,10 @@ firebase-debug.log*
 functions/service-account.json
 functions/node_modules/
 .vault/
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/

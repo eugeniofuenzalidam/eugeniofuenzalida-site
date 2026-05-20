@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { collection, query, orderBy, onSnapshot, addDoc, deleteDoc, doc, serverTimestamp } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 import { db, storage } from "../../lib/firebase";
@@ -15,6 +15,7 @@ export function GalleryManager() {
   const [images, setImages] = useState<GalleryImage[]>([]);
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const q = query(collection(db, "gallery"), orderBy("createdAt", "desc"));
@@ -58,8 +59,9 @@ export function GalleryManager() {
       alert("Hubo un error al subir la imagen. Verifica que Storage esté habilitado.");
     } finally {
       setUploading(false);
-      // Reset input
-      e.target.value = '';
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
     }
   };
 
@@ -92,6 +94,7 @@ export function GalleryManager() {
             {uploading ? "Subiendo..." : "Subir Imagen"}
             <input 
               type="file" 
+              ref={fileInputRef}
               accept="image/*" 
               multiple 
               className="hidden" 
